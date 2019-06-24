@@ -6,7 +6,7 @@ using Action;
 
 namespace Creature
 {
-    public abstract class Dragon
+    public abstract class Goblin
         : Monster
         , IAction
     {
@@ -15,4 +15,3 @@ namespace Creature
     }
 }
 
- 

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Factory.Monster
+namespace Type.Creature.Goblin
 {
-    public class MonsterFactory 
-        : MonoBehaviour
+    public enum EGoblinType
     {
-        
+        Thief,
+        Spear,
     }
 }
 

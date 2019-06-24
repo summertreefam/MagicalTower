@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Creature
+namespace Type.Creature.Dragon
 {
-    public class Monster 
+    public enum EDragonType
     {
-       
+        Fire,
+        Ice,
     }
 }
+
+
 

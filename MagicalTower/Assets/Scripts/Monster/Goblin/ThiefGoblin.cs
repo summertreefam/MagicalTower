@@ -4,14 +4,9 @@ using UnityEngine;
 
 namespace Creature
 {
-    public class FireDragon 
-        : Dragon
+    public class ThiefGoblin
+        : Goblin
     {
-        public FireDragon()
-        {
-            Debug.Log("FireDragon");
-        }
-
         public override void Attack()
         {
             
