@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-using Type.Creature.Goblin;
-using Creature;
+using NType.NGoblin;
+using NMonster;
+using NMonster.NGoblin;
 
-namespace Factory.Creature.Goblin
+namespace NFactory.NGoblin
 {
     public class GoblinFactory
         : MonsterFactory

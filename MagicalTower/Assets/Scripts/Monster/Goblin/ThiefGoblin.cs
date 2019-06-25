@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Creature
+namespace NMonster.NGoblin
 {
     public class ThiefGoblin
         : Goblin

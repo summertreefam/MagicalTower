@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Type.Creature.Goblin
+namespace NType.NGoblin
 {
     public enum EGoblinType
     {

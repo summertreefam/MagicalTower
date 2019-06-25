@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Action
+namespace NAction
 {
     public interface IAction 
     {

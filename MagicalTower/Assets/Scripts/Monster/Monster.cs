@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Creature
+namespace NMonster
 {
     public class Monster 
     {

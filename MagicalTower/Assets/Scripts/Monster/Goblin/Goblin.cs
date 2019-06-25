@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Action;
+using NAction;
 
-namespace Creature
+namespace NMonster.NGoblin
 {
     public abstract class Goblin
         : Monster

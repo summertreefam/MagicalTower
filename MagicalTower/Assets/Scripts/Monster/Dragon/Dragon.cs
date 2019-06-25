@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Action;
+using NAction;
 
-namespace Creature
+namespace NMonster.NDragon
 {
     public abstract class Dragon
         : Monster

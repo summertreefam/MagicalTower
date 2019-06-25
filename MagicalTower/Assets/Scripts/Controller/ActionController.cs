@@ -2,23 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Controller.Action
+namespace NController.NAction
 {
     public class ActionController 
-        : MonoBehaviour
     {
         private void Start()
         {
-            Factory.Creature.MonsterFactory factory = new Factory.Creature.Dragon.DragonFactory();
+            NFactory.MonsterFactory factory = new NFactory.NDragon.DragonFactory();
 
-            factory.CreateMonster(Type.Creature.Dragon.EDragonType.Ice.ToString());
+            factory.CreateMonster(NType.NDragon.EDragonType.Ice.ToString());
 
-            factory = new Factory.Creature.Goblin.GoblinFactory();
+            factory = new NFactory.NGoblin.GoblinFactory();
 
-            factory.CreateMonster(Type.Creature.Goblin.EGoblinType.Thief.ToString());
+            factory.CreateMonster(NType.NGoblin.EGoblinType.Thief.ToString());
         }
-
-
     }
 }
 
