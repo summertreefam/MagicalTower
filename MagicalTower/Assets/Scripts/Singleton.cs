@@ -7,7 +7,7 @@ namespace NSingleton
     public class Singleton
         : MonoBehaviour
     {
-        static Singleton _singleton = null;
+        static Singleton _singleton;
 
         public static Singleton Instance
         {
