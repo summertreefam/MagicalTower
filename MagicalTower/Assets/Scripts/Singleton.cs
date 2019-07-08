@@ -1,24 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 
 namespace NSingleton
-{
-    public class Singleton
-        : MonoBehaviour
+{ 
+    public class LazySingleton<T>
+        where T : class, new()
     {
-        static Singleton _singleton;
+        static readonly Lazy<T> _instance = new Lazy<T>(() => new T());
 
-        public static Singleton Instance
+        public static T Instance
         {
             get
             {
-                if(_singleton == null)
-                {
-                    _singleton = new Singleton();
-                }
-
-                return _singleton;
+                return _instance.Value;
             }
         }
     }

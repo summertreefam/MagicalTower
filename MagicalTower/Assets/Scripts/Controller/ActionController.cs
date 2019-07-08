@@ -5,6 +5,7 @@ using UnityEngine;
 namespace NController.NAction
 {
     public class ActionController 
+        : MonoBehaviour
     {
         private void Start()
         {
