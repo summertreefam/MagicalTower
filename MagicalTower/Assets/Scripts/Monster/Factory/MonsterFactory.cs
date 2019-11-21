@@ -9,12 +9,12 @@ namespace NFactory
 {
     public abstract class MonsterFactory
     {
-        public Monster CreateMonster<T>(T type) where T : class
+        public Monster CreateMonster<T>(T type) where T : Enum
         {
             return Create(type);
         }
 
-        abstract protected Monster Create<T>(T type) where T : class;
+        abstract protected Monster Create<T>(T type) where T : Enum;
     }
 }
 

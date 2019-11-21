@@ -16,7 +16,7 @@ namespace NFactory.NGoblin
         {
             try
             {
-                switch (Enum.Parse(typeof(EGoblinType), type.ToString()))
+                switch (Enum.Parse(typeof(T), Enum.GetName(typeof(T), type)))
                 {
                     case EGoblinType.Thief:
                         return new ThiefGoblin();

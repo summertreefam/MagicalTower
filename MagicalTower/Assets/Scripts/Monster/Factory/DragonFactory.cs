@@ -16,7 +16,7 @@ namespace NFactory.NDragon
         {
             try
             {
-                switch (Enum.Parse(typeof(EDragonType), type.ToString()))
+                switch (Enum.Parse(typeof(T), Enum.GetName(typeof(T), type)))
                 {
                     case EDragonType.Fire:
                         return new FireDragon();
