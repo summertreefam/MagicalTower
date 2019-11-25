@@ -2,26 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NGame.NFactory
+namespace NGame.NPuzzle.NFactory
 {
     public class PuzzleFactory 
         : MonoBehaviour
     {
+        MonsterFactory _monsterFactory;
+
         void CreatePuzzle()
         {
-            
+            //MonsterFactory factory = new NFactory.NDragon.DragonFactory();
         }
-        // Start is called before the first frame update
-        void Start()
-        {
+       
+        //Puzzle CreateMonster()
+        //{
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        //}
+        
     }
 
 }

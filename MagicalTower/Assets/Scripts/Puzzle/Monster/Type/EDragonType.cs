@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NType.NDragon
+namespace NGame.NType.NMonster.NDragon
 {
     public enum EDragonType
     {

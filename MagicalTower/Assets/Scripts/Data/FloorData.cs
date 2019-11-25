@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NGame.NType.NMonster.NGoblin
+namespace NGame.NData
 {
-    public enum EGoblinType
+    public class FloorData 
     {
-        Thief,
-        Spear,
+        public int Floor;
     }
 }
 

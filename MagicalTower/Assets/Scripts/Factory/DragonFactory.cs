@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-using NType.NDragon;
-using NMonster;
-using NMonster.NDragon;
+using NGame.NType.NMonster.NDragon;
+using NGame.NPuzzle.NMonster;
+using NGame.NPuzzle.NMonster.NDragon;
+using NGame.NPuzzle.NFactory;
 
-namespace NFactory.NDragon
+namespace NGame.NFactory.NDragon
 {
     public class DragonFactory
         : MonsterFactory

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NMonster.NDragon
+namespace NGame.NPuzzle.NMonster.NDragon
 {
     public class FireDragon 
         : Dragon

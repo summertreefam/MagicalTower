@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-using NType.NGoblin;
-using NMonster;
-using NMonster.NGoblin;
+using NGame.NType.NMonster.NGoblin;
+using NGame.NPuzzle.NMonster.NGoblin;
+using NGame.NPuzzle.NFactory;
+using NGame.NPuzzle.NMonster;
 
 namespace NFactory.NGoblin
 {

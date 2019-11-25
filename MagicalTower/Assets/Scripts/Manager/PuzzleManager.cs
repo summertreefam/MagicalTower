@@ -3,38 +3,34 @@ using System.Collections.Generic;
 using NGame.NLayer;
 using UnityEngine;
 
-using NGame.NFactory;
+using NGame.NPuzzle;
+using NGame.NPuzzle.NFactory;
 
 namespace NGame.NManager
 {
     public class PuzzleManager
         : MonoBehaviour
-        , GameLayer.IPuzzleDataListener
     {
-        PuzzleFactory _puzzleFactory = new PuzzleFactory();
+        List<Puzzle> _puzzleList;
+
+        PuzzleFactory _puzzleFactory;
 
         public PuzzleManager()
         {
-
+            InitPuzzleInfoList();
+            InitPuzzleFactory();
         }
 
-        // Start is called before the first frame update
-        void Start()
+        void InitPuzzleInfoList()
         {
-
+            _puzzleList = new List<Puzzle>();
+            _puzzleList.Clear();
         }
 
-        // Update is called once per frame
-        void Update()
+        void InitPuzzleFactory()
         {
-
+            _puzzleFactory = new PuzzleFactory();
         }
-
-        int GameLayer.IPuzzleDataListener.GetIndex()
-        {
-            return 1;
-        }
-
     }
 }
 

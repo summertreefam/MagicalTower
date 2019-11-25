@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NMonster.NGoblin
+namespace NGame.NPuzzle.NMonster.NGoblin
 {
     public class ThiefGoblin
         : Goblin

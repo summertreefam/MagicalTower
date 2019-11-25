@@ -6,6 +6,6 @@ namespace NGame.NInfo.NMonster
 {
     public class MonsterInfo 
     {
-        public 
+
     }
 }

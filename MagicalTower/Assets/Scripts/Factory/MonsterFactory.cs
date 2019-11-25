@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-using NMonster;
+using NGame.NPuzzle.NMonster;
 
-namespace NFactory
+namespace NGame.NPuzzle.NFactory
 {
     public abstract class MonsterFactory
     {

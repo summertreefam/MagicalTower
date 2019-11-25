@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using NAction;
+using NGame.NPuzzle.NMonster;
 
-namespace NMonster.NDragon
+namespace NGame.NPuzzle.NMonster.NDragon
 {
     public abstract class Dragon
         : Monster

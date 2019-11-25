@@ -4,7 +4,7 @@ using UnityEngine;
 
 using NAction;
 
-namespace NMonster.NGoblin
+namespace NGame.NPuzzle.NMonster.NGoblin
 {
     public abstract class Goblin
         : Monster
