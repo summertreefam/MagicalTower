@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NMonster
+namespace NGame.NPuzzle.NMonster
 {
     public class Monster 
     {
