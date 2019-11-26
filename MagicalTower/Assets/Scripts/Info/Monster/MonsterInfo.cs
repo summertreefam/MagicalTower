@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NGame.NInfo.NMonster
+namespace NGame.NInfo
 {
     public class MonsterInfo 
     {

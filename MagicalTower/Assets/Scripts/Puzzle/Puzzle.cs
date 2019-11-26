@@ -10,9 +10,9 @@ namespace NGame.NPuzzle
     public class Puzzle 
         : MonoBehaviour
     {
-        PuzzleInfo _puzzleInfo;
+        protected PuzzleInfo _puzzleInfo;
 
-        public void Create()
+        public Puzzle()
         {
 
         }

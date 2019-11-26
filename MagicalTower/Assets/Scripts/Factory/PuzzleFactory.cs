@@ -22,8 +22,9 @@ namespace NGame.NPuzzle.NFactory
             _monsterFactory = new MonsterFactory();
         }
 
-        void CreatePuzzle()
+        public Puzzle CreateMonsterPuzzle()
         {
+            return _monsterFactory.CreateMonster(EDragonType.Fire);
         }
     }
 }
