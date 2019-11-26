@@ -5,13 +5,12 @@ using System;
 
 using NGame.NType.NMonster.NGoblin;
 using NGame.NPuzzle.NMonster.NGoblin;
-using NGame.NPuzzle.NFactory;
 using NGame.NPuzzle.NMonster;
 
-namespace NFactory.NGoblin
+namespace NGame.NPuzzle.NFactory
 {
     public class GoblinFactory
-        : MonsterFactory
+        : BaseMonsterFactory
     {
         protected override Monster Create<T>(T type)
         {
@@ -27,8 +26,7 @@ namespace NFactory.NGoblin
             {
 
             }
-
-
+            
             return null;
         }
     }

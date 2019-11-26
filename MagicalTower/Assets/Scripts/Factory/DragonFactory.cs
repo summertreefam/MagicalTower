@@ -6,12 +6,11 @@ using System;
 using NGame.NType.NMonster.NDragon;
 using NGame.NPuzzle.NMonster;
 using NGame.NPuzzle.NMonster.NDragon;
-using NGame.NPuzzle.NFactory;
-
-namespace NGame.NFactory.NDragon
+ 
+namespace NGame.NPuzzle.NFactory
 {
     public class DragonFactory
-        : MonsterFactory
+        : BaseMonsterFactory
     {
         protected override Monster Create<T>(T type)
         {

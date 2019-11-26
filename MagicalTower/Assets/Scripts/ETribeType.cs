@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NGame.NPuzzle.NMonster
+namespace NGame.NType
 {
-    public class Monster 
-        : Puzzle
+    public enum ETribeType
     {
-       
+        MDragon,
+        MGoblin,
+
+        
     }
 }
 
