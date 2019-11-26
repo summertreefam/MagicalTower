@@ -14,7 +14,17 @@ namespace NGame.NManager
 
         void Start()
         {
+            InitPuzzleManager();
+            InitTowerManager();
+        }
+
+        void InitPuzzleManager()
+        {
             _puzzleManager = new PuzzleManager();
+        }
+
+        void InitTowerManager()
+        {
             _towerManager = new TowerManager();
         }
     }
