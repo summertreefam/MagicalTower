@@ -2,38 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using LitJson;
 
 namespace NUtility.NHelper
 {
     public static class JsonHelper
     {
-        public static T[] FromJson<T>(string json)
+        public static JsonData FromJson(string json)
         {
-            Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
-
-            return wrapper.items;
+            return JsonMapper.ToObject(json);
         }
 
         public static string ToJson<T>(T[] array)
         {
-            Wrapper<T> wrapper = new Wrapper<T>();
-            wrapper.items = array;
-
-            return JsonUtility.ToJson(wrapper);
-        }
-
-        public static string ToJson<T>(T[] array, bool prettyPrint)
-        {
-            Wrapper<T> wrapper = new Wrapper<T>();
-            wrapper.items = array;
-
-            return JsonUtility.ToJson(wrapper, prettyPrint);
-        }
-
-        [Serializable]
-        class Wrapper<T>
-        {
-            public T[] items;
+            return JsonMapper.ToJson(array);
         }
     }
 }

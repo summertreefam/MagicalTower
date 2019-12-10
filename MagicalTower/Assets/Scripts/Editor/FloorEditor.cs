@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Text;
 
 using NGame.NData;
 using NUtility.NHelper;
@@ -13,9 +14,6 @@ namespace NEditor
         : ScriptableWizard
     {
         Vector2 scrollPos;
-
-        bool _foldOut;
-        int _totalFloor;
 
         List<bool> _foldOutList = new List<bool>();
         List<FloorData> _floorDataList = new List<FloorData>();
@@ -33,16 +31,14 @@ namespace NEditor
 
         void Init()
         {
-            _totalFloor = 0;
+            LoadJson();
 
             _foldOutList.Clear();
 
-            for (int i = 0; i < _totalFloor; ++i)
+            for (int i = 0; i < _floorDataList.Count; ++i)
             {
                 _foldOutList.Add(false);
             }
-
-            //LoadJson();
         }
 
         void OnGUI()
@@ -51,9 +47,14 @@ namespace NEditor
 
             DrawButton();
 
-            for (int i = 0; i < _totalFloor; ++i)
+                foreach(var floorData in _floorDataList)
             {
-                DrawFloor(i + 1);
+                if(floorData == null)
+                {
+                    continue;
+                }
+
+                DrawFloor(floorData);
             }
 
             GUILayout.EndScrollView();
@@ -73,67 +74,96 @@ namespace NEditor
                 RemoveFloor();
             }
 
-            GUILayout.Button("Save");
+            if(GUILayout.Button("Save") == true)
+            {
+                SaveJson();
+            }
 
             EditorGUILayout.EndHorizontal();
         }
 
-        void DrawFloor(int floor)
+        void DrawFloor(FloorData floorData)
         {
-            FloorData floorData = new FloorData();
+            if(floorData == null)
+            {
+                return;
+            }
 
-            string totalMonsterCount = string.Empty;
+            int index = floorData.Floor - 1;
+        
+            _foldOutList[index] = EditorGUILayout.Foldout(_foldOutList[index], floorData.Floor.ToString());
 
-            _foldOutList[floor - 1] = EditorGUILayout.Foldout(_foldOutList[floor - 1], floor.ToString());
-
-            if (_foldOutList[floor - 1] == true)
+            if (_foldOutList[index] == true)
             {
                 EditorGUILayout.BeginHorizontal(GUI.skin.box);
 
                 //EditorGUILayout.LabelField("Floor", floor.ToString());
 
-                totalMonsterCount = "1";
+                var totalMonsterCount = floorData.TotalMonsterCount.ToString();
                 totalMonsterCount = EditorGUILayout.TextField("Total Monster Count", totalMonsterCount);
+
+                var parseTotalMonsterCount = 1;
+                if(int.TryParse(totalMonsterCount, out parseTotalMonsterCount) == false)
+                {
+                    parseTotalMonsterCount = 1;
+                }
+                _floorDataList[index].TotalMonsterCount = parseTotalMonsterCount > 0 ? parseTotalMonsterCount : 1;
 
                 EditorGUILayout.EndHorizontal();
 
                 GUILayout.Space(5f);
             }
-
-            //_floorDataList.Add(new FloorData()
-            //{
-            //    Floor = floor,
-            //    TotalMonsterCount = int.Parse(totalMonsterCount),
-            //});
         }
 
         void AddFloor()
         {
-            ++_totalFloor;
+            _floorDataList.Add(new FloorData()
+            {
+                Floor = _floorDataList.Count + 1,
+                TotalMonsterCount = 1,
+            });
 
             _foldOutList.Add(false);
         }
 
         void RemoveFloor()
         {
-            if (_totalFloor <= 0)
+            if (_floorDataList.Count <= 0)
             {
                 return;
             }
 
-            --_totalFloor;
+            _floorDataList.RemoveAt(_floorDataList.Count - 1);
+        }
+
+        void SaveJson()
+        {
+            var toJson = JsonHelper.ToJson(_floorDataList.ToArray());
+            Debug.Log("toJson : " + toJson);
+
+            File.WriteAllText(FloorDataFilePath, toJson);
         }
 
         void LoadJson()
         {
+            _floorDataList.Clear();
+
             if (File.Exists(FloorDataFilePath) == true)
             {
-                var json = File.ReadAllText(FloorDataFilePath);
+                var jsonString = File.ReadAllText(FloorDataFilePath);
+                var jsonDatas = JsonHelper.FromJson(jsonString);
 
-                var datas = JsonHelper.FromJson<FloorData>(json);
+                var floorData = new FloorData();
 
-                _floorDataList.Clear();
-                _floorDataList.AddRange(datas);
+                foreach(LitJson.JsonData jsonData in jsonDatas)
+                {
+                    floorData = new FloorData();
+
+                    floorData.Floor = int.Parse(jsonData["Floor"].ToString());
+                    floorData.TotalMonsterCount = int.Parse(jsonData["TotalMonsterCount"].ToString());
+
+                    _floorDataList.Add(floorData);
+                }
             }
         }
 
@@ -141,7 +171,7 @@ namespace NEditor
         {
             get
             {
-                return Application.dataPath + "/GameData/FloorData.json";
+                return Application.dataPath + "/Resources/GameData/FloorData.json";
             }
         }
     }
