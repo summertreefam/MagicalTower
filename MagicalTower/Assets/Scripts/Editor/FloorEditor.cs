@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
-using System.Text;
+using System.Linq;
+using System;
 
 using NGame.NData;
 using NUtility.NHelper;
@@ -35,21 +36,27 @@ namespace NEditor
 
             _foldOutList.Clear();
 
-            for (int i = 0; i < _floorDataList.Count; ++i)
+            for (int i = _floorDataList.Count - 1; i >= 0; --i)
             {
                 _foldOutList.Add(false);
             }
         }
 
+        #region Draw GUI
         void OnGUI()
         {
             scrollPos = GUILayout.BeginScrollView(scrollPos);
 
             DrawButton();
+            DrawDescription();
 
-                foreach(var floorData in _floorDataList)
+            FloorData floorData = null;
+
+            for (int i = _floorDataList.Count - 1; i >= 0; --i)
             {
-                if(floorData == null)
+                floorData = _floorDataList[i];
+
+                if (floorData == null)
                 {
                     continue;
                 }
@@ -82,6 +89,17 @@ namespace NEditor
             EditorGUILayout.EndHorizontal();
         }
 
+        void DrawDescription()
+        {
+            EditorGUILayout.BeginVertical(GUI.skin.box);
+
+            EditorGUILayout.LabelField("Disable Puszzles - [각 층에서 막을 퍼즐!! ',' 로 구분자.]");
+            EditorGUILayout.LabelField("Total Monster Count - [각 층에 나올 수 있는 전체 몬스터 수.]");
+            EditorGUILayout.LabelField("Limit Turn - [각 층의 게임을 끝내야 하는 제한 턴. 0 일 경우 제한 턴이 없음.]");
+
+            EditorGUILayout.EndVertical();
+        }
+        
         void DrawFloor(FloorData floorData)
         {
             if(floorData == null)
@@ -95,33 +113,132 @@ namespace NEditor
 
             if (_foldOutList[index] == true)
             {
-                EditorGUILayout.BeginHorizontal(GUI.skin.box);
+                EditorGUILayout.BeginVertical(GUI.skin.box);
 
-                //EditorGUILayout.LabelField("Floor", floor.ToString());
+                DrawDisablePuzzles(floorData);
+                DrawTotalMonsterCount(floorData);
+                DrawLimitTurn(floorData);
 
-                var totalMonsterCount = floorData.TotalMonsterCount.ToString();
-                totalMonsterCount = EditorGUILayout.TextField("Total Monster Count", totalMonsterCount);
-
-                var parseTotalMonsterCount = 1;
-                if(int.TryParse(totalMonsterCount, out parseTotalMonsterCount) == false)
-                {
-                    parseTotalMonsterCount = 1;
-                }
-                _floorDataList[index].TotalMonsterCount = parseTotalMonsterCount > 0 ? parseTotalMonsterCount : 1;
-
-                EditorGUILayout.EndHorizontal();
-
-                GUILayout.Space(5f);
+                EditorGUILayout.EndVertical();
             }
         }
 
+        void DrawTotalMonsterCount(FloorData floorData)
+        {
+            if(floorData == null)
+            {
+                return;
+            }
+
+            var totalMonsterCount = floorData.TotalMonsterCount.ToString();
+            totalMonsterCount = EditorGUILayout.TextField("Total Monster Count", totalMonsterCount);
+
+            var parseTotalMonsterCount = 1;
+            if (int.TryParse(totalMonsterCount, out parseTotalMonsterCount) == false)
+            {
+                parseTotalMonsterCount = 1;
+            }
+
+            floorData.TotalMonsterCount = parseTotalMonsterCount > 0 ? parseTotalMonsterCount : 1;
+        }
+
+        void DrawDisablePuzzles(FloorData floorData)
+        {
+            if(floorData == null)
+            {
+                return;
+            }
+
+            var disablePuzzles = string.Empty;
+
+            if (floorData.DiablePuzzles != null &&
+               floorData.DiablePuzzles.Length > 0)
+            {
+                foreach(int disablePuzzle in floorData.DiablePuzzles)
+                {
+                    if(disablePuzzle <= 0)
+                    {
+                        continue;
+                    }
+
+                    disablePuzzles += disablePuzzle;
+                    disablePuzzles += ",";
+                }
+
+                if(disablePuzzles.Length > 0)
+                {
+                    disablePuzzles = disablePuzzles.Substring(0, disablePuzzles.Length - 1);
+                }
+            }
+            
+            disablePuzzles = EditorGUILayout.TextField("Disable Puzzles", disablePuzzles);
+
+            if(disablePuzzles.Equals(string.Empty) == true)
+            {
+                floorData.DiablePuzzles = null;
+                return;
+            }
+
+            var splitDisablePuzzles = disablePuzzles.Split(',');
+
+            if (splitDisablePuzzles.Length > 0)
+            {
+                List<int> list = new List<int>();
+                list.Clear();
+
+                int parseDisablePuzzle = 0;
+                foreach(var disablePuzzle in splitDisablePuzzles)
+                {
+                    parseDisablePuzzle = 0;
+
+                    if (int.TryParse(disablePuzzle, out parseDisablePuzzle) == false)
+                    {
+                        continue;
+                    }
+
+                    if (parseDisablePuzzle <= 0)
+                    {
+                        continue;
+                    }
+
+                    if(list.Contains(parseDisablePuzzle) == true)
+                    {
+                        continue;
+                    }
+
+                    list.Add(parseDisablePuzzle);
+                }
+
+                floorData.DiablePuzzles = list.ToArray();
+            }
+        }
+
+        void DrawLimitTurn(FloorData floorData)
+        {
+            if (floorData == null)
+            {
+                return;
+            }
+
+            var limitTurn = floorData.LimitTurn.ToString();
+            limitTurn = EditorGUILayout.TextField("Limit Turn", limitTurn);
+
+            var parseLimitTurn = 0;
+            if (int.TryParse(limitTurn, out parseLimitTurn) == false)
+            {
+                parseLimitTurn = 0;
+            }
+
+            floorData.LimitTurn = parseLimitTurn >= 0 ? parseLimitTurn : 0;
+        }
+        #endregion GUI
+
         void AddFloor()
         {
-            _floorDataList.Add(new FloorData()
-            {
-                Floor = _floorDataList.Count + 1,
-                TotalMonsterCount = 1,
-            });
+            var floorData = FloorData.Create();
+            floorData.Floor = _floorDataList.Count + 1;
+
+            _floorDataList.Add(floorData);
 
             _foldOutList.Add(false);
         }
@@ -141,16 +258,16 @@ namespace NEditor
             var toJson = JsonHelper.ToJson(_floorDataList.ToArray());
             Debug.Log("toJson : " + toJson);
 
-            File.WriteAllText(FloorDataFilePath, toJson);
+            File.WriteAllText(NUtility.GameData.FloorDataFilePath, toJson);
         }
 
         void LoadJson()
         {
             _floorDataList.Clear();
 
-            if (File.Exists(FloorDataFilePath) == true)
+            if (File.Exists(NUtility.GameData.FloorDataFilePath) == true)
             {
-                var jsonString = File.ReadAllText(FloorDataFilePath);
+                var jsonString = File.ReadAllText(NUtility.GameData.FloorDataFilePath);
                 var jsonDatas = JsonHelper.FromJson(jsonString);
 
                 var floorData = new FloorData();
@@ -164,14 +281,6 @@ namespace NEditor
 
                     _floorDataList.Add(floorData);
                 }
-            }
-        }
-
-        string FloorDataFilePath
-        {
-            get
-            {
-                return Application.dataPath + "/Resources/GameData/FloorData.json";
             }
         }
     }

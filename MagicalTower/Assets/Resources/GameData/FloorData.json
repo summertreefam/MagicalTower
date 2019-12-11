@@ -1,1 +1,1 @@
-[{"Floor":1,"TotalMonsterCount":1},{"Floor":2,"TotalMonsterCount":1}]
+[{"Floor":1,"DiablePuzzles":[11],"TotalMonsterCount":1,"LimitTurn":10},{"Floor":2,"DiablePuzzles":[1,2,45],"TotalMonsterCount":1,"LimitTurn":0},{"Floor":3,"DiablePuzzles":[1111],"TotalMonsterCount":1,"LimitTurn":0}]
