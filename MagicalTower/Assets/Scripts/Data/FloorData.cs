@@ -9,7 +9,7 @@ namespace NGame.NData
     public class FloorData 
     {
         public int Floor { get; set; }
-        public int[] DiablePuzzles { get; set; }
+        public int[] DisablePuzzles { get; set; }
         public int TotalMonsterCount { get; set; }
         public int LimitTurn { get; set; }
 
@@ -18,7 +18,7 @@ namespace NGame.NData
             return new FloorData
             {
                 Floor = 1,
-                DiablePuzzles = null,
+                DisablePuzzles = null,
                 TotalMonsterCount = 1,
             };
         }

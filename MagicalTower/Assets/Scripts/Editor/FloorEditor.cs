@@ -13,13 +13,11 @@ using NGame.NManager.NTower;
 namespace NEditor
 {
     public class FloorEditor
-        : ScriptableWizard
+        : EditorWindow
     {
         Vector2 scrollPos;
         List<bool> _foldOutList = new List<bool>();
-
-        FloorManager _floorManager;
-        //List<FloorData> _floorDataList = new List<FloorData>();
+        List<FloorData> _floorDataList = new List<FloorData>();
 
         [MenuItem("Data/Floor")]
         static void OpenEditor()
@@ -34,11 +32,11 @@ namespace NEditor
 
         void Init()
         {
-            _floorManager = new FloorManager();
+            JsonHelper.LoadJsonFloorDataList(out _floorDataList);
 
             _foldOutList.Clear();
 
-            for (int i = _floorManager.FloorDataList.Count - 1; i >= 0; --i)
+            for (int i = _floorDataList.Count - 1; i >= 0; --i)
             {
                 _foldOutList.Add(false);
             }
@@ -54,9 +52,9 @@ namespace NEditor
 
             FloorData floorData = null;
 
-            for (int i = _floorManager.FloorDataList.Count - 1; i >= 0; --i)
+            for (int i = _floorDataList.Count - 1; i >= 0; --i)
             {
-                floorData = _floorManager.FloorDataList[i];
+                floorData = _floorDataList[i];
 
                 if (floorData == null)
                 {
@@ -153,10 +151,10 @@ namespace NEditor
 
             var disablePuzzles = string.Empty;
 
-            if (floorData.DiablePuzzles != null &&
-               floorData.DiablePuzzles.Length > 0)
+            if (floorData.DisablePuzzles != null &&
+               floorData.DisablePuzzles.Length > 0)
             {
-                foreach(int disablePuzzle in floorData.DiablePuzzles)
+                foreach(int disablePuzzle in floorData.DisablePuzzles)
                 {
                     if(disablePuzzle <= 0)
                     {
@@ -177,7 +175,7 @@ namespace NEditor
 
             if(disablePuzzles.Equals(string.Empty) == true)
             {
-                floorData.DiablePuzzles = null;
+                floorData.DisablePuzzles = null;
                 return;
             }
 
@@ -211,7 +209,7 @@ namespace NEditor
                     list.Add(parseDisablePuzzle);
                 }
 
-                floorData.DiablePuzzles = list.ToArray();
+                floorData.DisablePuzzles = list.ToArray();
             }
         }
 
@@ -238,26 +236,26 @@ namespace NEditor
         void AddFloor()
         {
             var floorData = FloorData.Create();
-            floorData.Floor = _floorManager.FloorDataList.Count + 1;
+            floorData.Floor = _floorDataList.Count + 1;
 
-            _floorManager.FloorDataList.Add(floorData);
+            _floorDataList.Add(floorData);
 
             _foldOutList.Add(true);
         }
 
         void RemoveFloor()
         {
-            if (_floorManager.FloorDataList.Count <= 0)
+            if (_floorDataList.Count <= 0)
             {
                 return;
             }
 
-            _floorManager.FloorDataList.RemoveAt(_floorManager.FloorDataList.Count - 1);
+            _floorDataList.RemoveAt(_floorDataList.Count - 1);
         }
 
         void SaveJson()
         {
-            var toJson = JsonHelper.ToJson(_floorManager.FloorDataList.ToArray());
+            var toJson = JsonHelper.ToJson(_floorDataList.ToArray());
             Debug.Log("toJson : " + toJson);
 
             File.WriteAllText(NUtility.GameData.FloorDataFilePath, toJson);
