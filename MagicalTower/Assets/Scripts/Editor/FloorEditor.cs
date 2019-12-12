@@ -93,9 +93,19 @@ namespace NEditor
         {
             EditorGUILayout.BeginVertical(GUI.skin.box);
 
+            EditorGUILayout.BeginVertical(GUI.skin.box);
+
             EditorGUILayout.LabelField("Disable Puszzles - [각 층에서 막을 퍼즐!! ',' 로 구분자.]");
             EditorGUILayout.LabelField("Total Monster Count - [각 층에 나올 수 있는 전체 몬스터 수.]");
             EditorGUILayout.LabelField("Limit Turn - [각 층의 게임을 끝내야 하는 제한 턴. 0 일 경우 제한 턴이 없음.]");
+
+            EditorGUILayout.EndVertical();
+
+            EditorGUILayout.BeginVertical(GUI.skin.box);
+
+            EditorGUILayout.LabelField("Max Row - " + NUtility.GameData.MaxPuzzleRow + " / " + "Max Column - " + NUtility.GameData.MaxPuzzleColumn);
+
+            EditorGUILayout.EndVertical();
 
             EditorGUILayout.EndVertical();
         }

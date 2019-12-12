@@ -9,13 +9,16 @@ namespace NGame.NLayer
     public class GameLayer 
         : MonoBehaviour
     {
-
-        PuzzleManager _puzzleManager = new PuzzleManager();
-
+        GameManager _gameManager;
         // Start is called before the first frame update
         void Start()
         {
             
+        }
+
+        void InitGameManager()
+        {
+            _gameManager = new GameManager();
         }
 
         // Update is called once per frame

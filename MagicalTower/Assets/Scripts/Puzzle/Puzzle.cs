@@ -8,13 +8,23 @@ using NGame.NPuzzle.NMonster;
 namespace NGame.NPuzzle
 {
     public class Puzzle 
-        : MonoBehaviour
     {
         protected PuzzleInfo _puzzleInfo;
 
         public Puzzle()
         {
+            
+        }
 
+        public Puzzle(int index, EPuzzleType ePuzzleType, int row, int column)
+        {
+            _puzzleInfo = new PuzzleInfo()
+            {
+                Index = index,
+                EPuzzleType = ePuzzleType,
+                Row = row,
+                Column = column,
+            };
         }
     }
 }

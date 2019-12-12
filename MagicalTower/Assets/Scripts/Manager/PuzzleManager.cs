@@ -5,17 +5,26 @@ using UnityEngine;
 
 using NGame.NPuzzle;
 using NGame.NPuzzle.NFactory;
+using NGame.NData;
 
 namespace NGame.NManager
 {
     public class PuzzleManager
         : MonoBehaviour
     {
+        PuzzleFactory _puzzleFactory;
+        FloorManager.IDataProvider _iFloorDataProvider;
+
         List<Puzzle> _puzzleList;
 
-        PuzzleFactory _puzzleFactory;
+        public PuzzleManager(FloorManager.IDataProvider iFloorDataProvider)
+        {
+            _iFloorDataProvider = iFloorDataProvider;
 
-        public PuzzleManager()
+            Init();
+        }
+
+        private void Init()
         {
             InitPuzzleInfoList();
             InitPuzzleFactory();
@@ -25,11 +34,38 @@ namespace NGame.NManager
         {
             _puzzleList = new List<Puzzle>();
             _puzzleList.Clear();
+
+            SetPuzzleInfoList();
         }
 
         void InitPuzzleFactory()
         {
             _puzzleFactory = new PuzzleFactory();
+        }
+
+        private void SetPuzzleInfoList()
+        {
+            if(_iFloorDataProvider == null)
+            {
+                return;
+            }
+
+            var currentFloorData = _iFloorDataProvider.GetCurrentFloorData();
+
+            if (currentFloorData == null)
+            {
+                return;
+            }
+
+            Puzzle puzzle = null;
+
+            for(int row = 0; row < NUtility.GameData.MaxPuzzleRow; ++row)
+            {
+                for(int column = 0; column < NUtility.GameData.MaxPuzzleColumn; ++column)
+                {
+                    
+                }
+            }
         }
     }
 }

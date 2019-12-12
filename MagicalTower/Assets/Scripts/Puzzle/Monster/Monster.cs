@@ -11,10 +11,10 @@ namespace NGame.NPuzzle.NMonster
     {
         MonsterInfo _monsterInfo;
 
-        public Monster()
-        {
-
-        }
+        //public Monster(int index, EPuzzleType ePuzzleType, int row, int column)
+        //{
+        //    base(index, ePuzzleType, row, column);
+        //}
     }
 }
 

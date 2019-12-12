@@ -2,30 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using NGame.NManager.NTower;
-
 namespace NGame.NManager
 {
     public class GameManager 
         : MonoBehaviour
     {
         PuzzleManager _puzzleManager;
-        TowerManager _towerManager;
+        FloorManager _floorManager;
 
-        void Start()
+        public GameManager()
         {
+            Init();
+        }
+
+        private void Init()
+        {
+            InitFloorManager();
             InitPuzzleManager();
-            InitTowerManager();
+        }
+
+        void InitFloorManager()
+        {
+            _floorManager = new FloorManager();
         }
 
         void InitPuzzleManager()
         {
-            _puzzleManager = new PuzzleManager();
-        }
+            if(_floorManager == null)
+            {
+                return;
+            }
 
-        void InitTowerManager()
-        {
-            _towerManager = new TowerManager();
+            _puzzleManager = new PuzzleManager(_floorManager);
         }
     }
 }
