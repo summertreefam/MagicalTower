@@ -9,8 +9,7 @@ using NGame.NType.NMonster.NGoblin;
 namespace NGame.NPuzzle.NFactory
 {
     public class PuzzleFactory 
-        : MonoBehaviour
-        , PuzzleFactory.IDataProvider
+        : PuzzleFactory.IDataProvider
     {
         public interface IDataProvider
         {

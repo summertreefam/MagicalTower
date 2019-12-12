@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 using NGame.NPuzzle.NMonster;
-using NGame.NType.NMonster.NDragon;
+using NGame.NType;
 
 namespace NGame.NPuzzle.NFactory
 {
@@ -15,6 +15,7 @@ namespace NGame.NPuzzle.NFactory
             return Create(type);
         }
 
+        abstract public ETribeType ETribeType { get; }
         abstract protected Monster Create<T>(T type) where T : Enum;
     }
 
@@ -46,6 +47,7 @@ namespace NGame.NPuzzle.NFactory
 
                 if (monster != null)
                 {
+                    monster.Create(monsterFactory.ETribeType);
                     break;
                 }
             }

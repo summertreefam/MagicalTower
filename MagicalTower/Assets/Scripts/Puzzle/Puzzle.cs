@@ -11,12 +11,7 @@ namespace NGame.NPuzzle
     {
         protected PuzzleInfo _puzzleInfo;
 
-        public Puzzle()
-        {
-            
-        }
-
-        public Puzzle(int index, EPuzzleType ePuzzleType, int row, int column)
+        public void Create(int index, EPuzzleType ePuzzleType, int row, int column)
         {
             _puzzleInfo = new PuzzleInfo()
             {

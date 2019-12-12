@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using NGame.NInfo;
+using NGame.NType;
 
 namespace NGame.NPuzzle.NMonster
 {
@@ -11,10 +12,13 @@ namespace NGame.NPuzzle.NMonster
     {
         MonsterInfo _monsterInfo;
 
-        //public Monster(int index, EPuzzleType ePuzzleType, int row, int column)
-        //{
-        //    base(index, ePuzzleType, row, column);
-        //}
+        public void Create(ETribeType eTribeType)
+        {
+            _monsterInfo = new MonsterInfo()
+            {
+                ETribeType = eTribeType,
+            };
+        }
     }
 }
 

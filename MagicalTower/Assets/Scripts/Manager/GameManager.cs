@@ -10,7 +10,7 @@ namespace NGame.NManager
         PuzzleManager _puzzleManager;
         FloorManager _floorManager;
 
-        public GameManager()
+        private void Start()
         {
             Init();
         }

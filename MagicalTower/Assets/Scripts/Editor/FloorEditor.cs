@@ -8,7 +8,6 @@ using System;
 
 using NGame.NData;
 using NUtility.NHelper;
-using NGame.NManager.NTower;
 
 namespace NEditor
 {

@@ -10,9 +10,10 @@ using NGame.NData;
 namespace NGame.NManager
 {
     public class PuzzleManager
-        : MonoBehaviour
     {
         PuzzleFactory _puzzleFactory;
+        PuzzleFactory.IDataProvider _iPuzzleFactoryDataProvider;
+
         FloorManager.IDataProvider _iFloorDataProvider;
 
         List<Puzzle> _puzzleList;
@@ -41,6 +42,9 @@ namespace NGame.NManager
         void InitPuzzleFactory()
         {
             _puzzleFactory = new PuzzleFactory();
+            _iPuzzleFactoryDataProvider = _puzzleFactory as PuzzleFactory.IDataProvider;
+
+            var puzzle = _iPuzzleFactoryDataProvider.CreateMonsterPuzzle(NType.NMonster.NDragon.EDragonType.Fire);
         }
 
         private void SetPuzzleInfoList()
@@ -63,7 +67,7 @@ namespace NGame.NManager
             {
                 for(int column = 0; column < NUtility.GameData.MaxPuzzleColumn; ++column)
                 {
-                    
+
                 }
             }
         }

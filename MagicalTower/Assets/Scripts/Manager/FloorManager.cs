@@ -10,8 +10,7 @@ using NUtility.NHelper;
 namespace NGame.NManager
 {
     public class FloorManager 
-        : MonoBehaviour
-        , FloorManager.IDataProvider
+        : FloorManager.IDataProvider
     {
         public interface IDataProvider
         {
