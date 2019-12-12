@@ -9,11 +9,11 @@ namespace NGame.NPuzzle
 {
     public class Puzzle 
     {
-        protected PuzzleInfo _puzzleInfo;
+        public PuzzleInfo PuzzleInfo { get; private set; }
 
         public void Create(int index, EPuzzleType ePuzzleType, int row, int column)
         {
-            _puzzleInfo = new PuzzleInfo()
+            PuzzleInfo = new PuzzleInfo()
             {
                 Index = index,
                 EPuzzleType = ePuzzleType,
