@@ -7,7 +7,8 @@ namespace NUtility
     public class GameData
     {
         #region Path
-        public static string FloorDataFilePath = Application.dataPath + "/Resources/GameData/FloorData.json";
+        public static string DataPath = Application.dataPath + "/Resources";
+        public static string FloorDataFilePath = DataPath + "/GameData/FloorData.json";
         #endregion
 
         public static int MaxPuzzleRow = 6;

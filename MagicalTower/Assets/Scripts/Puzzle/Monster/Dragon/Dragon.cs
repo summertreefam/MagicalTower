@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using NAction;
 using NGame.NPuzzle.NMonster;
+using System;
 
 namespace NGame.NPuzzle.NMonster.NDragon
 {
@@ -11,8 +11,14 @@ namespace NGame.NPuzzle.NMonster.NDragon
         : Monster
         , IAction
     {
-        public abstract void Attack();
-        public abstract void Move();
+        protected Dragon()
+        {
+            _iAction = this;
+        }
+
+        protected abstract new void Attack();
+
+        protected abstract new void Move();
     }
 }
 

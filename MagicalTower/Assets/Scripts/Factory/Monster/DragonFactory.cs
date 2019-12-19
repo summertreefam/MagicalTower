@@ -29,6 +29,9 @@ namespace NGame.NPuzzle.NFactory
                 {
                     case EDragonType.Fire:
                         return new FireDragon();
+
+                    case EDragonType.Ice:
+                        return new IceDragon();
                 }
             }
             catch

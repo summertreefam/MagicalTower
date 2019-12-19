@@ -5,6 +5,7 @@ using System;
 
 using NGame.NPuzzle.NMonster;
 using NGame.NType;
+using NGame.NPuzzle.NMonster.NDragon;
 
 namespace NGame.NPuzzle.NFactory
 {
@@ -35,8 +36,8 @@ namespace NGame.NPuzzle.NFactory
         public Monster CreateMonster<T>(T type) where T : Enum
         {
             Monster monster = null;
-
-            foreach(var monsterFactory in _monsterFactoryList)
+            
+            foreach (var monsterFactory in _monsterFactoryList)
             {
                 if(monsterFactory == null)
                 {

@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using NAction;
-
 namespace NGame.NPuzzle.NMonster.NGoblin
 {
     public abstract class Goblin
         : Monster
         , IAction
     {
-        public abstract void Attack();
-        public abstract void Move();
+        protected Goblin()
+        {
+            _iAction = this;
+        }
+        public abstract new void Attack();
+        public abstract new void Move();
     }
 }
 

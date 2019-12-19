@@ -4,8 +4,10 @@ using NGame.NLayer;
 using UnityEngine;
 
 using NGame.NPuzzle;
+using NGame.NPuzzle.NMonster;
+using NGame.NPuzzle.NItem;
 using NGame.NPuzzle.NFactory;
-using NGame.NData;
+using NGame.NType;
 
 namespace NGame.NManager
 {
@@ -44,7 +46,10 @@ namespace NGame.NManager
             _puzzleFactory = new PuzzleFactory();
             _iPuzzleFactoryDataProvider = _puzzleFactory as PuzzleFactory.IDataProvider;
 
-            var puzzle = _iPuzzleFactoryDataProvider.CreateMonsterPuzzle(NType.NMonster.NDragon.EDragonType.Fire);
+            var puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Item, EItemType.HpPotion);
+            
+            Debug.Log("puzzle.Get<Monster>().MonsterInfo : " + puzzle.Get<Item>().ItemInfo.EItemType);
+            puzzle.Get<Item>().Use();
         }
 
         private void SetPuzzleInfoList()
@@ -62,8 +67,8 @@ namespace NGame.NManager
             }
 
             Puzzle puzzle = null;
-
-            for(int row = 0; row < NUtility.GameData.MaxPuzzleRow; ++row)
+            
+            for (int row = 0; row < NUtility.GameData.MaxPuzzleRow; ++row)
             {
                 for(int column = 0; column < NUtility.GameData.MaxPuzzleColumn; ++column)
                 {

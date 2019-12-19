@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NAction
-{
-    public interface IAction 
+namespace NGame.NType
+{ 
+    public enum EItemType
     {
-        void Attack();
-        void Move();
+        HpPotion,
+        MpPotion,
+
+
     }
 }
-

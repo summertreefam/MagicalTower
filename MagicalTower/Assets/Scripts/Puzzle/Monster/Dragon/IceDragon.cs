@@ -1,27 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 namespace NGame.NPuzzle.NMonster.NDragon
 {
-    public class FireDragon 
+    public class IceDragon
         : Dragon
     {
-        public FireDragon()
+        public IceDragon()
         {
-            Debug.Log("FireDragon");
+            Debug.Log("Ice Dragon");
         }
 
         protected override void Attack()
         {
-            Debug.Log("FireDragon Attack()");
+            Debug.Log("Ice Dragon Attack()");
         }
 
         protected override void Move()
         {
-            
+
         }
     }
 }
-
