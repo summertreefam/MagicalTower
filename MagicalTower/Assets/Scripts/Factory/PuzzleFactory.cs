@@ -17,6 +17,7 @@ namespace NGame.NPuzzle.NFactory
 
         MonsterFactory _monsterFactory;
         ItemFactory _itemFactory;
+        CurrencyFactory _currencyFactory;
 
         public PuzzleFactory()
         {
@@ -27,6 +28,7 @@ namespace NGame.NPuzzle.NFactory
         {
             _monsterFactory = new MonsterFactory();
             _itemFactory = new ItemFactory();
+            _currencyFactory = new CurrencyFactory();
         }
 
         #region Create Puzzle
@@ -50,19 +52,36 @@ namespace NGame.NPuzzle.NFactory
             return _itemFactory.Create(tType);
         }
 
+        Puzzle CreateCurrencyPuzzle<T>(T tType) where T : Enum
+        {
+            if (_currencyFactory == null)
+            {
+                return null;
+            }
+
+            return _currencyFactory.Create(tType);
+        }
+
         Puzzle IDataProvider.CreatePuzzle<T>(EPuzzleType ePuzzleType, T tType)
         {
+            Puzzle puzzle = null;
+
             switch (ePuzzleType)
             {
                 case EPuzzleType.Monster:
-                    return CreateMonsterPuzzle(tType);
+                    puzzle = CreateMonsterPuzzle(tType);
+                    break;
 
                 case EPuzzleType.Item:
-                    return CreateItemPuzzle(tType);
+                    puzzle = CreateItemPuzzle(tType);
+                    break;
 
-                default:
-                    return null;
+                case EPuzzleType.Currency:
+                    puzzle = CreateCurrencyPuzzle(tType);
+                    break;
             }
+
+            return puzzle;
         }
         #endregion
     }

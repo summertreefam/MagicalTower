@@ -7,6 +7,7 @@ using System.Linq;
 using System;
 
 using NGame.NData;
+using NGame.NType;
 using NUtility.NHelper;
 
 namespace NEditor
@@ -16,6 +17,9 @@ namespace NEditor
     {
         Vector2 scrollPos;
         List<bool> _foldOutList = new List<bool>();
+
+        List<Dictionary<EMonsterType, bool>> _monsterTypeListDic = new List<Dictionary<EMonsterType, bool>>();
+        List<bool> _monsterTypeFoldOutList = new List<bool>();
         List<FloorData> _floorDataList = new List<FloorData>();
 
         [MenuItem("Data/Floor")]
@@ -34,10 +38,16 @@ namespace NEditor
             JsonHelper.LoadJsonFloorDataList(out _floorDataList);
 
             _foldOutList.Clear();
+            _monsterTypeListDic.Clear();
+            _monsterTypeFoldOutList.Clear();
 
             for (int i = _floorDataList.Count - 1; i >= 0; --i)
             {
                 _foldOutList.Add(false);
+
+                _monsterTypeListDic.Add(new Dictionary<EMonsterType, bool>());
+
+                _monsterTypeFoldOutList.Add(true);
             }
         }
 
@@ -95,8 +105,8 @@ namespace NEditor
             EditorGUILayout.BeginVertical(GUI.skin.box);
 
             EditorGUILayout.LabelField("Disable Puszzles - [각 층에서 막을 퍼즐!! ',' 로 구분자.]");
-            EditorGUILayout.LabelField("Total Monster Count - [각 층에 나올 수 있는 전체 몬스터 수.]");
             EditorGUILayout.LabelField("Limit Turn - [각 층의 게임을 끝내야 하는 제한 턴. 0 일 경우 제한 턴이 없음.]");
+            EditorGUILayout.LabelField("Total Monster Count - [각 층에 나올 수 있는 전체 몬스터 수.]");
 
             EditorGUILayout.EndVertical();
 
@@ -125,35 +135,17 @@ namespace NEditor
                 EditorGUILayout.BeginVertical(GUI.skin.box);
 
                 DrawDisablePuzzles(floorData);
-                DrawTotalMonsterCount(floorData);
                 DrawLimitTurn(floorData);
+                DrawTotalMonsterCount(floorData);
+                DrawMonsterType(floorData);
 
                 EditorGUILayout.EndVertical();
             }
         }
 
-        void DrawTotalMonsterCount(FloorData floorData)
-        {
-            if(floorData == null)
-            {
-                return;
-            }
-
-            var totalMonsterCount = floorData.TotalMonsterCount.ToString();
-            totalMonsterCount = EditorGUILayout.TextField("Total Monster Count", totalMonsterCount);
-
-            var parseTotalMonsterCount = 1;
-            if (int.TryParse(totalMonsterCount, out parseTotalMonsterCount) == false)
-            {
-                parseTotalMonsterCount = 1;
-            }
-
-            floorData.TotalMonsterCount = parseTotalMonsterCount > 0 ? parseTotalMonsterCount : 1;
-        }
-
         void DrawDisablePuzzles(FloorData floorData)
         {
-            if(floorData == null)
+            if (floorData == null)
             {
                 return;
             }
@@ -163,9 +155,9 @@ namespace NEditor
             if (floorData.DisablePuzzles != null &&
                floorData.DisablePuzzles.Length > 0)
             {
-                foreach(int disablePuzzle in floorData.DisablePuzzles)
+                foreach (int disablePuzzle in floorData.DisablePuzzles)
                 {
-                    if(disablePuzzle <= 0)
+                    if (disablePuzzle <= 0)
                     {
                         continue;
                     }
@@ -174,15 +166,15 @@ namespace NEditor
                     disablePuzzles += ",";
                 }
 
-                if(disablePuzzles.Length > 0)
+                if (disablePuzzles.Length > 0)
                 {
                     disablePuzzles = disablePuzzles.Substring(0, disablePuzzles.Length - 1);
                 }
             }
-            
+
             disablePuzzles = EditorGUILayout.TextField("Disable Puzzles", disablePuzzles);
 
-            if(disablePuzzles.Equals(string.Empty) == true)
+            if (disablePuzzles.Equals(string.Empty) == true)
             {
                 floorData.DisablePuzzles = null;
                 return;
@@ -196,7 +188,7 @@ namespace NEditor
                 list.Clear();
 
                 int parseDisablePuzzle = 0;
-                foreach(var disablePuzzle in splitDisablePuzzles)
+                foreach (var disablePuzzle in splitDisablePuzzles)
                 {
                     parseDisablePuzzle = 0;
 
@@ -210,7 +202,7 @@ namespace NEditor
                         continue;
                     }
 
-                    if(list.Contains(parseDisablePuzzle) == true)
+                    if (list.Contains(parseDisablePuzzle) == true)
                     {
                         continue;
                     }
@@ -239,6 +231,64 @@ namespace NEditor
             }
 
             floorData.LimitTurn = parseLimitTurn >= 0 ? parseLimitTurn : 0;
+        }
+
+        void DrawTotalMonsterCount(FloorData floorData)
+        {
+            if (floorData == null)
+            {
+                return;
+            }
+
+            var totalMonsterCount = floorData.TotalMonsterCount.ToString();
+            totalMonsterCount = EditorGUILayout.TextField("Total Monster Count", totalMonsterCount);
+
+            var parseTotalMonsterCount = 1;
+            if (int.TryParse(totalMonsterCount, out parseTotalMonsterCount) == false)
+            {
+                parseTotalMonsterCount = 1;
+            }
+
+            floorData.TotalMonsterCount = parseTotalMonsterCount > 0 ? parseTotalMonsterCount : 1;
+        }
+
+        void DrawMonsterType(FloorData floorData)
+        {
+            if (floorData == null)
+            {
+                return;
+            }
+
+            if (_monsterTypeListDic == null ||
+                _monsterTypeListDic.Count < floorData.Floor)
+            {
+                return;
+            }
+
+            if (_monsterTypeFoldOutList == null ||
+                _monsterTypeFoldOutList.Count < floorData.Floor)
+            {
+                return;
+            }
+
+            int index = floorData.Floor - 1;
+
+            _monsterTypeFoldOutList[index] = EditorGUILayout.Foldout(_monsterTypeFoldOutList[index], "Monster Type");
+
+            if(_monsterTypeFoldOutList[index] == true)
+            {
+                foreach (EMonsterType monsterType in Enum.GetValues(typeof(EMonsterType)))
+                {
+                    if (_monsterTypeListDic[index] == null ||
+                        _monsterTypeListDic[index].ContainsKey(monsterType) == false)
+                    {
+                        _monsterTypeListDic[index].Add(monsterType, false);
+                    }
+
+                    _monsterTypeListDic[index][monsterType] = EditorGUILayout.Toggle(monsterType.ToString(), _monsterTypeListDic[index][monsterType]);
+                }
+
+            }
         }
         #endregion GUI
 

@@ -46,8 +46,8 @@ namespace NUtility.NHelper
 
                 floorData.Floor = GetParseJsonData<int>(jsonData["Floor"]);
                 floorData.DisablePuzzles = GetListParseJsonData<int>(jsonData["DisablePuzzles"]).ToArray();
-                floorData.TotalMonsterCount = GetParseJsonData<int>(jsonData["TotalMonsterCount"]);
                 floorData.LimitTurn = GetParseJsonData<int>(jsonData["LimitTurn"]);
+                floorData.TotalMonsterCount = GetParseJsonData<int>(jsonData["TotalMonsterCount"]);
 
                 floorDataList.Add(floorData);
             }
@@ -63,6 +63,7 @@ namespace NUtility.NHelper
             {
                 return default(T);
             }
+
 
             return (T)Convert.ChangeType(jsonData.ToString(), typeof(T));
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 using NGame.NInfo;
 using NGame.NType;
@@ -22,14 +23,27 @@ namespace NGame.NPuzzle.NMonster
 
         protected IAction _iAction;
 
-        public void Create(ETribeType eTribeType)
+        public void Create(Type type)
         {
             base.Create(this);
 
             MonsterInfo = new MonsterInfo()
             {
-                ETribeType = eTribeType,
+                MonsterType = GetEMonsterType(type),
             };
+        }
+
+        EMonsterType GetEMonsterType(Type type)
+        {
+            foreach (EMonsterType monsterType in Enum.GetValues(typeof(EMonsterType)))
+            {
+                if (type.ToString().Contains(monsterType.ToString()) == true)
+                {
+                    return monsterType;
+                }
+            }
+
+            return EMonsterType.Basic;
         }
 
         Monster IPuzzle.Get<Monster>()

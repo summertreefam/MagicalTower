@@ -21,16 +21,16 @@ namespace NGame.NPuzzle
         protected void Create(IPuzzle iPuzzle)
         {
             _iPuzzle = iPuzzle;
+
+            PuzzleInfo = PuzzleInfo.Create();
         }
 
-        public void Create(int index, EPuzzleType ePuzzleType, Vector2Int position)
+        public void Create(int index, Vector2Int position)
         {
-            PuzzleInfo = new PuzzleInfo()
+            if(PuzzleInfo != null)
             {
-                Index = index,
-                EPuzzleType = ePuzzleType,
-                Position = position,
-            };
+
+            }
         }
 
         public T Get<T>() where T : Puzzle

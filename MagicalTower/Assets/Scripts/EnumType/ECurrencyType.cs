@@ -4,11 +4,8 @@ using UnityEngine;
 
 namespace NGame.NType
 {
-    public enum ETribeType
+    public enum ECurrencyType
     {
-        MDragon,
-        MGoblin,
-
+        Gold,
     }
 }
-

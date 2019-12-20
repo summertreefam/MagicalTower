@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NGame.NType.NMonster.NDragon
+namespace NGame.NType.NMonster
 {
     public enum EDragonType
     {
+        Normal,
+        MidBoss,
+
         Fire,
         Ice,
     }

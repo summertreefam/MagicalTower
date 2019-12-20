@@ -6,8 +6,10 @@ using NGame.NType;
 
 namespace NGame.NInfo
 {
-    public class MonsterInfo 
+    public class CurrencyInfo
     {
-        public ETribeType ETribeType { get; set; }
+        public ECurrencyType ECurrencyType { get; set; }
+        public int Value { get; set; }
     }
 }
+

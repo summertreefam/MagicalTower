@@ -1,1 +1,1 @@
-[{"Floor":1,"DisablePuzzles":[12,1,4],"TotalMonsterCount":1,"LimitTurn":0},{"Floor":2,"DisablePuzzles":null,"TotalMonsterCount":1,"LimitTurn":0},{"Floor":3,"DisablePuzzles":[10,1],"TotalMonsterCount":10,"LimitTurn":1}]
+[{"Floor":1,"DisablePuzzles":[12,1,4],"TotalMonsterCount":1,"LimitTurn":0},{"Floor":2,"DisablePuzzles":[],"TotalMonsterCount":1,"LimitTurn":0},{"Floor":3,"DisablePuzzles":[10,1],"TotalMonsterCount":10,"LimitTurn":1},{"Floor":4,"DisablePuzzles":null,"TotalMonsterCount":1,"LimitTurn":0}]

@@ -4,13 +4,11 @@ using UnityEngine;
 
 namespace NGame.NType
 {
-    public enum EPuzzleType
+    public enum EMonsterType
     {
-        Disable,
+        Basic,
 
-        Monster,
-        Item,
-        Currency,
+        Dragon,
+        Goblin,
     }
 }
-
