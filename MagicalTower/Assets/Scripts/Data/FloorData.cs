@@ -16,7 +16,7 @@ namespace NGame.NData
         public int TotalMonsterCount { get; set; }
         public EMonsterType[] EMonsterTypes { get; set; }
         public bool IsMidBoss { get; set; }
-        public string LastBoos { get; set; }
+        public string LastBoss { get; set; }
 
         public static FloorData Create()
         {

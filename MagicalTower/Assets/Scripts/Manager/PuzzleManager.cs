@@ -30,16 +30,16 @@ namespace NGame.NManager
 
         private void Init()
         {
-            InitPuzzleInfoList();
             InitPuzzleFactory();
+            InitPuzzleList();
+
+            SetPuzzleList();
         }
 
-        void InitPuzzleInfoList()
+        void InitPuzzleList()
         {
             _puzzleList = new List<Puzzle>();
-            _puzzleList.Clear();
-
-            SetPuzzleInfoList();
+            _puzzleList.Clear(); 
         }
 
         void InitPuzzleFactory()
@@ -53,7 +53,7 @@ namespace NGame.NManager
             puzzle.Get<Monster>().Attack();
         }
 
-        private void SetPuzzleInfoList()
+        private void SetPuzzleList()
         {
             if(_iFloorDataProvider == null)
             {

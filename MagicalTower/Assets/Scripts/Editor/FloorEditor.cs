@@ -137,7 +137,7 @@ namespace NEditor
                 DrawDisablePuzzles(floorData);
                 DrawLimitTurn(floorData);
                 DrawTotalMonsterCount(floorData);
-                DrawMonsterType(floorData);
+                //DrawMonsterType(floorData);
 
                 EditorGUILayout.EndVertical();
             }
@@ -287,7 +287,6 @@ namespace NEditor
 
                     _monsterTypeListDic[index][monsterType] = EditorGUILayout.Toggle(monsterType.ToString(), _monsterTypeListDic[index][monsterType]);
                 }
-
             }
         }
         #endregion GUI
@@ -318,6 +317,6 @@ namespace NEditor
             Debug.Log("toJson : " + toJson);
 
             File.WriteAllText(NUtility.GameData.FloorDataFilePath, toJson);
-        }
+        } 
     }
 }
