@@ -4,16 +4,11 @@ using UnityEngine;
 
 namespace NGame.NType
 {
-    public enum EPuzzleType
+    public enum EEquipmentType
     {
-        Disable,
+        Sword,
+        bow,
 
-        Monster,
-        Item,
 
-        Equipment,
-
-        Currency,
     }
 }
-
