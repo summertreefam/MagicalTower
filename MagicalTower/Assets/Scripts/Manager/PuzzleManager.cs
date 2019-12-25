@@ -23,6 +23,12 @@ namespace NGame.NManager
 
         public PuzzleManager(FloorManager.IDataProvider iFloorDataProvider)
         {
+            if(iFloorDataProvider == null)
+            {
+                Debug.LogError("FloorManager.IDataProvider is null.");
+                return;
+            }
+
             _iFloorDataProvider = iFloorDataProvider;
 
             Init();

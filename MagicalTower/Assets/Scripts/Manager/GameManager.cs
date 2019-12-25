@@ -9,6 +9,7 @@ namespace NGame.NManager
     {
         PuzzleManager _puzzleManager;
         FloorManager _floorManager;
+        PuzzleTouchManager _puzzleTouchManager;
 
         private void Start()
         {
@@ -17,23 +18,15 @@ namespace NGame.NManager
 
         private void Init()
         {
-            InitFloorManager();
-            InitPuzzleManager();
+            InitManager();
         }
 
-        void InitFloorManager()
+        void InitManager()
         {
             _floorManager = new FloorManager();
-        }
-
-        void InitPuzzleManager()
-        {
-            if(_floorManager == null)
-            {
-                return;
-            }
-
             _puzzleManager = new PuzzleManager(_floorManager);
+
+            _puzzleTouchManager = gameObject.AddComponent<PuzzleTouchManager>();
         }
     }
 }
