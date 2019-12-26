@@ -7,7 +7,8 @@ namespace NGame.NManager
     public class GameManager 
         : MonoBehaviour
     {
-        PuzzleManager _puzzleManager;
+        public PuzzleManager PuzzleManager;
+
         FloorManager _floorManager;
         PuzzleTouchManager _puzzleTouchManager;
 
@@ -24,7 +25,11 @@ namespace NGame.NManager
         void InitManager()
         {
             _floorManager = new FloorManager();
-            _puzzleManager = new PuzzleManager(_floorManager);
+
+            if(PuzzleManager != null)
+            {
+                PuzzleManager.Init(_floorManager);
+            }
 
             _puzzleTouchManager = gameObject.AddComponent<PuzzleTouchManager>();
         }

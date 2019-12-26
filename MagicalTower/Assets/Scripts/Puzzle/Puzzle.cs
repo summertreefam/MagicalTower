@@ -17,6 +17,7 @@ namespace NGame.NPuzzle
         public PuzzleInfo PuzzleInfo { get; private set; }
 
         IPuzzle _iPuzzle;
+        GameObject _puzzlePrefGameObj;
 
         protected void Create(IPuzzle iPuzzle)
         {
@@ -25,12 +26,14 @@ namespace NGame.NPuzzle
             PuzzleInfo = PuzzleInfo.Create();
         }
 
-        public void Create(int index, Vector2Int position)
+        public void Create(Transform parentTransform)
         {
-            if(PuzzleInfo != null)
+            if(PuzzleInfo == null)
             {
-
+                return;
             }
+
+            _puzzlePrefGameObj = PuzzlePref.Create(parentTransform);
         }
 
         public T Get<T>() where T : Puzzle

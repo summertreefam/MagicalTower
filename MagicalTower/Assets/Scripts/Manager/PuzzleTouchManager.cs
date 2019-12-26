@@ -18,16 +18,46 @@ namespace NGame.NManager
         // Update is called once per frame
         void Update()
         {
+            if(Input.GetMouseButtonDown(0) == true)
+            {
+                MouseClick();
+
+                return;
+            }
+
             if(Input.touchCount > 0)
             {
-                var touch = Input.GetTouch(0);
+                Touch();
 
-                switch(touch.phase)
-                {
-                    case TouchPhase.Began:
-                        Debug.Log("PuzzleTouchManager Began Touch");
-                        break;
-                }
+                return;
+            }
+        }
+
+        void MouseClick()
+        {
+            Debug.Log("GetMouseButtonDown");
+
+            //Vector3 wp = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            //Vector2 touchPos = new Vector2(wp.x, wp.y);
+            //foreach()
+
+            //if (collider2D == Physics2D.OverlapPoint(touchPos))
+            //{
+
+            //}
+            
+            return;
+        }
+
+        void Touch()
+        {
+            var touch = Input.GetTouch(0);
+
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    Debug.Log("PuzzleTouchManager Began Touch");
+                    break;
             }
         }
     }

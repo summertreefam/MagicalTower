@@ -13,6 +13,7 @@ using NGame.NType.NMonster;
 namespace NGame.NManager
 {
     public class PuzzleManager
+        : MonoBehaviour
     {
         PuzzleFactory _puzzleFactory;
         PuzzleFactory.IDataProvider _iPuzzleFactoryDataProvider;
@@ -21,23 +22,21 @@ namespace NGame.NManager
 
         List<Puzzle> _puzzleList;
 
-        public PuzzleManager(FloorManager.IDataProvider iFloorDataProvider)
+        private void Start()
         {
-            if(iFloorDataProvider == null)
+            InitPuzzleFactory();
+            InitPuzzleList();
+        }
+
+        public void Init(FloorManager.IDataProvider iFloorDataProvider)
+        {
+            if (iFloorDataProvider == null)
             {
                 Debug.LogError("FloorManager.IDataProvider is null.");
                 return;
             }
 
             _iFloorDataProvider = iFloorDataProvider;
-
-            Init();
-        }
-
-        private void Init()
-        {
-            InitPuzzleFactory();
-            InitPuzzleList();
 
             SetPuzzleList();
         }
@@ -55,7 +54,7 @@ namespace NGame.NManager
 
             var puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Monster, EDragonType.Ice);
      
-            Debug.Log("puzzle.Get<Monster>().MonsterInfo.MonsterType : " + puzzle.Get<Monster>().MonsterInfo.MonsterType);
+            Debug.Log("puzzle.Get<Monster>().MonsterInfo.MonsterType : " + puzzle.Get<Monster>().MonsterInfo);
             puzzle.Get<Monster>().Attack();
         }
 
@@ -104,9 +103,10 @@ namespace NGame.NManager
 
                     if(puzzle != null)
                     {
-                        //puzzle.Create()
+                        puzzle.Create(transform);
 
-                           
+
+
                     }
                 }
             }
