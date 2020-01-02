@@ -29,16 +29,32 @@ namespace NGame.NPuzzle
 
         public void Create(Transform parentTransform, int index)
         {
-            if(PuzzleInfo == null)
+            _puzzlePrefGameObj = PuzzlePref.Create(parentTransform);
+
+            SetPuzzleIndex(index);
+            InitPuzzleRect();
+        }
+
+        void SetPuzzleIndex(int index)
+        {
+            if (PuzzleInfo != null)
+            {
+                PuzzleInfo.Index = index;
+            }
+
+            if (_puzzlePrefGameObj == null)
             {
                 return;
             }
 
-            PuzzleInfo.Index = index;
+            var puzzlePrefab = _puzzlePrefGameObj.GetComponent<PuzzlePref>();
 
-            _puzzlePrefGameObj = PuzzlePref.Create(parentTransform);
+            if(puzzlePrefab == null)
+            {
+                return;
+            }
 
-            InitPuzzleRect();
+            puzzlePrefab.PuzzleIndex = index;
         }
 
         void InitPuzzleRect()

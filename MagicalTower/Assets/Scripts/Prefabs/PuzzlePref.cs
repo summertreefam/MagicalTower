@@ -7,6 +7,8 @@ namespace NGame.NPuzzle
     public class PuzzlePref
         : MonoBehaviour
     {
+        public int PuzzleIndex { get; set; }
+
         public static GameObject Create(Transform parentTranform)
         {
             var puzzlePrefabPath = NUtility.GameData.PrefabPath + "/Puzzle";

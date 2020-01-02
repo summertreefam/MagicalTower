@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using NGame.NPuzzle;
+
 namespace NGame.NManager
 {
     public class PuzzleTouchManager
         : MonoBehaviour
     {
-        BoxCollider _boxCollider;
-
         // Start is called before the first frame update
         void Start()
         {
@@ -18,14 +18,14 @@ namespace NGame.NManager
         // Update is called once per frame
         void Update()
         {
-            if(Input.GetMouseButtonDown(0) == true)
+            if (Input.GetMouseButtonDown(0) == true)
             {
                 MouseClick();
 
                 return;
             }
 
-            if(Input.touchCount > 0)
+            if (Input.touchCount > 0)
             {
                 Touch();
 
@@ -35,17 +35,8 @@ namespace NGame.NManager
 
         void MouseClick()
         {
-            Debug.Log("GetMouseButtonDown");
+            TouchPuzzle(Input.mousePosition);
 
-            //Vector3 wp = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-            //Vector2 touchPos = new Vector2(wp.x, wp.y);
-            //foreach()
-
-            //if (collider2D == Physics2D.OverlapPoint(touchPos))
-            //{
-
-            //}
-            
             return;
         }
 
@@ -57,8 +48,41 @@ namespace NGame.NManager
             {
                 case TouchPhase.Began:
                     Debug.Log("PuzzleTouchManager Began Touch");
+                    TouchPuzzle(touch.position);
+                    break;
+
+                case TouchPhase.Moved:
                     break;
             }
+        }
+
+        void TouchPuzzle(Vector3 position)
+        {
+            var touchPosition = Camera.main.ScreenToWorldPoint(position);
+
+            var hit = Physics2D.Raycast(touchPosition, Vector2.zero);
+
+            if (hit == false)
+            {
+                return;   
+            }
+
+            var transform = hit.transform;
+
+            if (transform == null ||
+                transform.gameObject == null)
+            {
+                return;
+            }
+
+            var puzzlePrefab = transform.gameObject.GetComponent<PuzzlePref>();
+
+            if (puzzlePrefab == null)
+            {
+                return;
+            }
+
+            Debug.Log("puzzlePrefab.PuzzleIndex : " + puzzlePrefab.PuzzleIndex);
         }
     }
 }
