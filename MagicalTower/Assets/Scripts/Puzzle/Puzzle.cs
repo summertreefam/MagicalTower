@@ -15,6 +15,7 @@ namespace NGame.NPuzzle
     public class Puzzle
     {
         public PuzzleInfo PuzzleInfo { get; private set; }
+        public Rect PuzzleRect { get; private set; }
 
         IPuzzle _iPuzzle;
         GameObject _puzzlePrefGameObj;
@@ -26,14 +27,53 @@ namespace NGame.NPuzzle
             PuzzleInfo = PuzzleInfo.Create();
         }
 
-        public void Create(Transform parentTransform)
+        public void Create(Transform parentTransform, int index)
         {
             if(PuzzleInfo == null)
             {
                 return;
             }
 
+            PuzzleInfo.Index = index;
+
             _puzzlePrefGameObj = PuzzlePref.Create(parentTransform);
+
+            InitPuzzleRect();
+        }
+
+        void InitPuzzleRect()
+        {
+            if(_puzzlePrefGameObj == null)
+            {
+                return;
+            }
+
+            var spriteRenderer = _puzzlePrefGameObj.GetComponent<SpriteRenderer>();
+
+            if(spriteRenderer == null)
+            {
+                return;
+            }
+
+            if(spriteRenderer.sprite == null)
+            {
+                return;
+            }
+
+            PuzzleRect = spriteRenderer.sprite.rect;
+        }
+
+        public void SetPuzzlePosition(Vector2Int position)
+        {
+            if(PuzzleInfo != null)
+            {
+                PuzzleInfo.Position = position;
+            }
+
+            if(_puzzlePrefGameObj != null)
+            {
+                _puzzlePrefGameObj.transform.localPosition = new Vector3(position.x, position.y, _puzzlePrefGameObj.transform.localPosition.z);
+            }
         }
 
         public T Get<T>() where T : Puzzle

@@ -9,7 +9,7 @@ namespace NGame.NPuzzle.NMonster.NDragon
     {
         public IceDragon()
         {
-            Debug.Log("Ice Dragon");
+            //Debug.Log("Ice Dragon");
         }
 
         protected override void Attack()

@@ -11,12 +11,18 @@ namespace NGame.NPuzzle
         {
             var puzzlePrefabPath = NUtility.GameData.PrefabPath + "/Puzzle";
 
-            var puzzleGameObject = Instantiate(Resources.Load(puzzlePrefabPath)) as GameObject;
-            puzzleGameObject.transform.parent = parentTranform;
-            puzzleGameObject.transform.localScale = Vector3.one;
-            puzzleGameObject.transform.localPosition = Vector3.zero;
+            var puzzleGameObj = Instantiate(Resources.Load(puzzlePrefabPath)) as GameObject;
 
-            return puzzleGameObject;
+            if(puzzleGameObj == null)
+            {
+                return null;
+            } 
+
+            puzzleGameObj.transform.parent = parentTranform;
+            puzzleGameObj.transform.localScale = Vector3.one;
+            puzzleGameObj.transform.localPosition = Vector3.zero;
+
+            return puzzleGameObj;
         }
     }
 }
