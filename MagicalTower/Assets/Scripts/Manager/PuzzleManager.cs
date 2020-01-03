@@ -14,6 +14,7 @@ namespace NGame.NManager
 {
     public class PuzzleManager
         : MonoBehaviour
+        , PuzzleTouchManager.IObserver
     {
         PuzzleFactory _puzzleFactory;
         PuzzleFactory.IDataProvider _iPuzzleFactoryDataProvider;
@@ -143,6 +144,11 @@ namespace NGame.NManager
             var startPositionY = (int)(puzzle.PuzzleRect.height * NUtility.GameData.MaxPuzzleRow) / 2 - (int)(puzzle.PuzzleRect.height / 2);
             
             return (int)puzzle.PuzzleRect.height * row - startPositionY;
+        }
+
+        void PuzzleTouchManager.IObserver.Change(List<int> touchPuzzleIndexList)
+        {
+            Debug.Log("touchPuzzleIndexList : " + touchPuzzleIndexList.Count);
         }
     }
 }

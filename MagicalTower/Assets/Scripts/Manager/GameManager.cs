@@ -17,6 +17,7 @@ namespace NGame.NManager
             Init();
         }
 
+        #region Init
         private void Init()
         {
             InitManager();
@@ -31,8 +32,24 @@ namespace NGame.NManager
                 PuzzleManager.Init(_floorManager);
             }
 
-            _puzzleTouchManager = gameObject.AddComponent<PuzzleTouchManager>();
+            InitPuzzleTouchManager();
         }
+
+        private void InitPuzzleTouchManager()
+        {
+            _puzzleTouchManager = gameObject.AddComponent<PuzzleTouchManager>();
+
+            AddObserverByPuzzleTouchManager();
+        }
+
+        private void AddObserverByPuzzleTouchManager()
+        {
+            if(_puzzleTouchManager != null)
+            {
+                _puzzleTouchManager.AddObserver(PuzzleManager);
+            }
+        }
+        #endregion
     }
 }
 

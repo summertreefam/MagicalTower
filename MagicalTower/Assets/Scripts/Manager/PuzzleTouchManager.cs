@@ -9,16 +9,25 @@ namespace NGame.NManager
     public class PuzzleTouchManager
         : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        public interface IObserver
         {
-            Debug.Log("PuzzleTouchManager Start");
+            void Change(List<int> touchPuzzleIndexList);
         }
 
-        // Update is called once per frame
+        List<IObserver> _iObserverList;
+
+        List<int> _touchPuzzleIndexList;
+
+        void Start()
+        {
+            _touchPuzzleIndexList = new List<int>();
+            _touchPuzzleIndexList.Clear();
+        }
+
         void Update()
         {
-            if (Input.GetMouseButtonDown(0) == true)
+            if (Input.GetMouseButtonDown(0) == true ||
+                Input.GetMouseButton(0) == true)
             {
                 MouseClick();
 
@@ -33,11 +42,25 @@ namespace NGame.NManager
             }
         }
 
+        private void InitObserverList()
+        {
+            _iObserverList = new List<IObserver>();
+            _iObserverList.Clear();
+        }
+
+        public void AddObserver(IObserver iObserver)
+        {
+            if(_iObserverList == null)
+            {
+                InitObserverList();
+            }
+
+            _iObserverList.Add(iObserver);
+        }
+
         void MouseClick()
         {
             TouchPuzzle(Input.mousePosition);
-
-            return;
         }
 
         void Touch()
@@ -47,17 +70,23 @@ namespace NGame.NManager
             switch (touch.phase)
             {
                 case TouchPhase.Began:
+                case TouchPhase.Moved:
                     Debug.Log("PuzzleTouchManager Began Touch");
                     TouchPuzzle(touch.position);
                     break;
 
-                case TouchPhase.Moved:
+                case TouchPhase.Canceled:
                     break;
             }
         }
 
         void TouchPuzzle(Vector3 position)
         {
+            if(_touchPuzzleIndexList == null)
+            {
+                return;
+            }
+
             var touchPosition = Camera.main.ScreenToWorldPoint(position);
 
             var hit = Physics2D.Raycast(touchPosition, Vector2.zero);
@@ -82,7 +111,17 @@ namespace NGame.NManager
                 return;
             }
 
-            Debug.Log("puzzlePrefab.PuzzleIndex : " + puzzlePrefab.PuzzleIndex);
+            if(_touchPuzzleIndexList.Contains(puzzlePrefab.PuzzleIndex) == true)
+            {
+                return;
+            }
+
+            _touchPuzzleIndexList.Add(puzzlePrefab.PuzzleIndex);
+
+            if(_iObserverList != null)
+            {
+                _iObserverList.ForEach(e => e.Change(_touchPuzzleIndexList));
+            }
         }
     }
 }
