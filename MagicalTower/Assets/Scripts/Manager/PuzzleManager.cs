@@ -13,6 +13,8 @@ using NGame.NType.NMonster;
 namespace NGame.NManager
 {
     public class PuzzleManager
+        : MonoBehaviour
+        , PuzzleTouchManager.IObserver
     {
         PuzzleFactory _puzzleFactory;
         PuzzleFactory.IDataProvider _iPuzzleFactoryDataProvider;
@@ -21,23 +23,21 @@ namespace NGame.NManager
 
         List<Puzzle> _puzzleList;
 
-        public PuzzleManager(FloorManager.IDataProvider iFloorDataProvider)
+        private void Start()
         {
-            if(iFloorDataProvider == null)
+            InitPuzzleFactory();
+            InitPuzzleList();
+        }
+
+        public void Init(FloorManager.IDataProvider iFloorDataProvider)
+        {
+            if (iFloorDataProvider == null)
             {
                 Debug.LogError("FloorManager.IDataProvider is null.");
                 return;
             }
 
             _iFloorDataProvider = iFloorDataProvider;
-
-            Init();
-        }
-
-        private void Init()
-        {
-            InitPuzzleFactory();
-            InitPuzzleList();
 
             SetPuzzleList();
         }
@@ -55,7 +55,7 @@ namespace NGame.NManager
 
             var puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Monster, EDragonType.Ice);
      
-            Debug.Log("puzzle.Get<Monster>().MonsterInfo.MonsterType : " + puzzle.Get<Monster>().MonsterInfo.MonsterType);
+            Debug.Log("puzzle.Get<Monster>().MonsterInfo.MonsterType : " + puzzle.Get<Monster>().MonsterInfo);
             puzzle.Get<Monster>().Attack();
         }
 
@@ -80,6 +80,10 @@ namespace NGame.NManager
 
             Puzzle puzzle = null;
 
+            int puzzlePositionX = 0;
+            int puzzlePositionY = 0;
+            int puzzleIndex = 0;
+
             int random = 0;
 
             for (int row = 0; row < NUtility.GameData.MaxPuzzleRow; ++row)
@@ -87,29 +91,64 @@ namespace NGame.NManager
                 for(int column = 0; column < NUtility.GameData.MaxPuzzleColumn; ++column)
                 {
                     random = UnityEngine.Random.Range(1, 100);
-                    Debug.Log("random : " + random);
-                    if(random <= 10) 
-                    {
-                        puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Currency, ECurrencyType.Gold);
-                    }
-                    else if(random <= 50)
-                    {
-                        puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Monster, EDragonType.Fire);
-                    }
-                    else
+                    //Debug.Log("random : " + random);
+                    //if(random <= 10) 
+                    //{
+                    //    puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Currency, ECurrencyType.Gold);
+                    //}
+                    //else if(random <= 50)
+                    //{
+                    //    puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Monster, EDragonType.Fire);
+                    //}
+                    //else
                     {
                         puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Monster, EDragonType.Ice);
-                        Debug.Log("puzzle.Get<Monster>().MonsterInfo.MonsterType : " + puzzle.Get<Monster>().MonsterInfo.MonsterType);
+                        //Debug.Log("puzzle.Get<Monster>().MonsterInfo.MonsterType : " + puzzle.Get<Monster>().MonsterInfo.MonsterType);
                     }
 
                     if(puzzle != null)
                     {
-                        //puzzle.Create()
+                        puzzle.Create(transform, puzzleIndex++);
+          
+                        puzzlePositionX = GetPuzzlePositionX(puzzle, column, puzzlePositionX);
+                        puzzlePositionY = GetPuzzlePositionY(puzzle, row);
 
-                           
+                        puzzle.SetPuzzlePosition(new Vector2Int(puzzlePositionX, puzzlePositionY));
                     }
                 }
             }
+        }
+
+        int GetPuzzlePositionX(Puzzle puzzle, int column, int puzzlePositionX)
+        {
+            if(puzzle == null)
+            {
+                return 0;
+            }
+
+            if (column == 0)
+            {
+                return (int)(puzzle.PuzzleRect.width / 2) - (int)(puzzle.PuzzleRect.width * NUtility.GameData.MaxPuzzleColumn) / 2;
+            }
+
+            return puzzlePositionX + (int)puzzle.PuzzleRect.width;
+        }
+
+        int GetPuzzlePositionY(Puzzle puzzle, int row)
+        {
+            if (puzzle == null)
+            {
+                return 0;
+            }
+
+            var startPositionY = (int)(puzzle.PuzzleRect.height * NUtility.GameData.MaxPuzzleRow) / 2 - (int)(puzzle.PuzzleRect.height / 2);
+            
+            return (int)puzzle.PuzzleRect.height * row - startPositionY;
+        }
+
+        void PuzzleTouchManager.IObserver.Change(List<int> touchPuzzleIndexList)
+        {
+            Debug.Log("touchPuzzleIndexList : " + touchPuzzleIndexList.Count);
         }
     }
 }
