@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		
+		<key>skill624_effect0-hd.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{13, 11}, {424, 416}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 0}</string>
+			<key>spriteSize</key>
+			<string>{450, 450}</string>
+			<key>spriteSourceSize</key>
+			<string>{450, 450}</string>
+			<key>spriteTrimmed</key>
+			<false/>
+			<key>textureRect</key>
+			<string>{{0, 0}, {450, 450}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>skill624_effect1-hd.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{13, 11}, {424, 384}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 0}</string>
+			<key>spriteSize</key>
+			<string>{450, 450}</string>
+			<key>spriteSourceSize</key>
+			<string>{450, 450}</string>
+			<key>spriteTrimmed</key>
+			<false/>
+			<key>textureRect</key>
+			<string>{{452, 0}, {450, 450}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>skill624_effect10-hd.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{94, 102}, {276, 280}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 0}</string>
+			<key>spriteSize</key>
+			<string>{450, 450}</string>
+			<key>spriteSourceSize</key>
+			<string>{450, 450}</string>
+			<key>spriteTrimmed</key>
+			<false/>
+			<key>textureRect</key>
+			<string>{{904, 0}, {450, 450}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>skill624_effect2-hd.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{13, 11}, {424, 384}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 0}</string>
+			<key>spriteSize</key>
+			<string>{450, 450}</string>
+			<key>spriteSourceSize</key>
+			<string>{450, 450}</string>
+			<key>spriteTrimmed</key>
+			<false/>
+			<key>textureRect</key>
+			<string>{{1356, 0}, {450, 450}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>skill624_effect3-hd.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{13, 11}, {424, 384}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 0}</string>
+			<key>spriteSize</key>
+			<string>{450, 450}</string>
+			<key>spriteSourceSize</key>
+			<string>{450, 450}</string>
+			<key>spriteTrimmed</key>
+			<false/>
+			<key>textureRect</key>
+			<string>{{0, 452}, {450, 450}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>skill624_effect4-hd.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{13, 11}, {424, 384}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 0}</string>
+			<key>spriteSize</key>
+			<string>{450, 450}</string>
+			<key>spriteSourceSize</key>
+			<string>{450, 450}</string>
+			<key>spriteTrimmed</key>
+			<false/>
+			<key>textureRect</key>
+			<string>{{452, 452}, {450, 450}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>skill624_effect5-hd.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{18, 99}, {410, 346}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 0}</string>
+			<key>spriteSize</key>
+			<string>{450, 450}</string>
+			<key>spriteSourceSize</key>
+			<string>{450, 450}</string>
+			<key>spriteTrimmed</key>
+			<false/>
+			<key>textureRect</key>
+			<string>{{904, 452}, {450, 450}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>skill624_effect6-hd.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{18, 99}, {410, 346}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 0}</string>
+			<key>spriteSize</key>
+			<string>{450, 450}</string>
+			<key>spriteSourceSize</key>
+			<string>{450, 450}</string>
+			<key>spriteTrimmed</key>
+			<false/>
+			<key>textureRect</key>
+			<string>{{1356, 452}, {450, 450}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>skill624_effect7-hd.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{27, 116}, {302, 284}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 0}</string>
+			<key>spriteSize</key>
+			<string>{450, 450}</string>
+			<key>spriteSourceSize</key>
+			<string>{450, 450}</string>
+			<key>spriteTrimmed</key>
+			<false/>
+			<key>textureRect</key>
+			<string>{{0, 904}, {450, 450}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>skill624_effect8-hd.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{35, 116}, {346, 312}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 0}</string>
+			<key>spriteSize</key>
+			<string>{450, 450}</string>
+			<key>spriteSourceSize</key>
+			<string>{450, 450}</string>
+			<key>spriteTrimmed</key>
+			<false/>
+			<key>textureRect</key>
+			<string>{{452, 904}, {450, 450}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>skill624_effect9-hd.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{102, 96}, {262, 264}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 0}</string>
+			<key>spriteSize</key>
+			<string>{450, 450}</string>
+			<key>spriteSourceSize</key>
+			<string>{450, 450}</string>
+			<key>spriteTrimmed</key>
+			<false/>
+			<key>textureRect</key>
+			<string>{{904, 904}, {450, 450}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>version</key>
+		<string>1.5.4</string>
+		<key>format</key>
+		<integer>3</integer>
+		<key>size</key>
+		<string>{2048, 2048}</string>
+		<key>name</key>
+		<string>Untitled</string>
+		<key>premultipliedAlpha</key>
+		<true/>
+		<key>target</key>
+		<dict>
+			<key>name</key>
+			<string>default</string>
+			<key>textureFileName</key>
+			<string>skill624_effect-hd.pvr</string>
+			<key>textureFileExtension</key>
+			<string>.pvr.ccz</string>
+			<key>coordinatesFileName</key>
+			<string>skill624_effect-hd</string>
+			<key>coordinatesFileExtension</key>
+			<string>.plist</string>
+			<key>premultipliedAlpha</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
