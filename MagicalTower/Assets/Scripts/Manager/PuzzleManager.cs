@@ -23,7 +23,7 @@ namespace NGame.NManager
 
         List<Puzzle> _puzzleList;
 
-        private void Start()
+        private void Awake()
         {
             InitPuzzleFactory();
             InitPuzzleList();
@@ -121,29 +121,35 @@ namespace NGame.NManager
 
         int GetPuzzlePositionX(Puzzle puzzle, int column, int puzzlePositionX)
         {
-            if(puzzle == null)
+            if(puzzle == null ||
+               puzzle.PuzzleBoxCollider == null)
             {
                 return 0;
             }
 
+            var width = puzzle.PuzzleBoxCollider.size.x;
+
             if (column == 0)
             {
-                return (int)(puzzle.PuzzleRect.width / 2) - (int)(puzzle.PuzzleRect.width * NUtility.GameData.MaxPuzzleColumn) / 2;
+                return (int)(width / 2) - (int)(width * NUtility.GameData.MaxPuzzleColumn) / 2;
             }
 
-            return puzzlePositionX + (int)puzzle.PuzzleRect.width;
+            return puzzlePositionX + (int)width;
         }
 
         int GetPuzzlePositionY(Puzzle puzzle, int row)
         {
-            if (puzzle == null)
+            if (puzzle == null ||
+                puzzle.PuzzleBoxCollider == null)
             {
                 return 0;
             }
 
-            var startPositionY = (int)(puzzle.PuzzleRect.height * NUtility.GameData.MaxPuzzleRow) / 2 - (int)(puzzle.PuzzleRect.height / 2);
+            var height = puzzle.PuzzleBoxCollider.size.y;
+
+            var startPositionY = (int)(height * NUtility.GameData.MaxPuzzleRow) / 2 - (int)(height / 2);
             
-            return (int)puzzle.PuzzleRect.height * row - startPositionY;
+            return (int)height * row - startPositionY;
         }
 
         void PuzzleTouchManager.IObserver.Change(List<int> touchPuzzleIndexList)

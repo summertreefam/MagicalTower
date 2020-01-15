@@ -15,7 +15,18 @@ namespace NGame.NPuzzle
     public class Puzzle
     {
         public PuzzleInfo PuzzleInfo { get; private set; }
-        public Rect PuzzleRect { get; private set; }
+        public BoxCollider PuzzleBoxCollider 
+        { 
+            get
+            {
+                if(_puzzlePrefGameObj == null)
+                {
+                    return null;
+                }
+
+                return _puzzlePrefGameObj.GetComponent<BoxCollider>();
+            }
+        }
 
         IPuzzle _iPuzzle;
         GameObject _puzzlePrefGameObj;
@@ -32,7 +43,6 @@ namespace NGame.NPuzzle
             _puzzlePrefGameObj = PuzzlePref.Create(parentTransform);
 
             SetPuzzleIndex(index);
-            InitPuzzleRect();
         }
 
         void SetPuzzleIndex(int index)
@@ -55,28 +65,6 @@ namespace NGame.NPuzzle
             }
 
             puzzlePrefab.PuzzleIndex = index;
-        }
-
-        void InitPuzzleRect()
-        {
-            if(_puzzlePrefGameObj == null)
-            {
-                return;
-            }
-
-            var spriteRenderer = _puzzlePrefGameObj.GetComponent<SpriteRenderer>();
-
-            if(spriteRenderer == null)
-            {
-                return;
-            }
-
-            if(spriteRenderer.sprite == null)
-            {
-                return;
-            }
-
-            PuzzleRect = spriteRenderer.sprite.rect;
         }
 
         public void SetPuzzlePosition(Vector2Int position)
