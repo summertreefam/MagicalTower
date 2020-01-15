@@ -15,7 +15,7 @@ namespace NGame.NPuzzle
     public class Puzzle
     {
         public PuzzleInfo PuzzleInfo { get; private set; }
-        public BoxCollider PuzzleBoxCollider 
+        public BoxCollider2D PuzzleBoxCollider 
         { 
             get
             {
@@ -24,7 +24,7 @@ namespace NGame.NPuzzle
                     return null;
                 }
 
-                return _puzzlePrefGameObj.GetComponent<BoxCollider>();
+                return _puzzlePrefGameObj.GetComponent<BoxCollider2D>();
             }
         }
 
