@@ -46,10 +46,10 @@ namespace NGame.NPuzzle
             switch(EquipmentInfo.EEquipmentType)
             {
                 case EEquipmentType.Sword:
-                    return imgPath + "s_weapon100-hd.png";
+                    return imgPath + "s_weapon100-hd";
 
                 case EEquipmentType.Shield:
-                    return imgPath + "assistance400-hd.png";
+                    return imgPath + "assistance400-hd";
 
                 default:
                     return string.Empty;

@@ -51,7 +51,7 @@ namespace NGame.NPuzzle
             _puzzlePrefGameObj = PuzzlePref.Create(parentTransform);
 
             SetPuzzleIndex(index);
-            //SetPuzzleSprite();
+            SetPuzzleSprite();
         }
 
         void SetPuzzleIndex(int index)
@@ -109,9 +109,14 @@ namespace NGame.NPuzzle
             }
 
             var imgPath = "Images/" + _iPuzzle.GetPuzzleImageName();
-            Debug.Log("imgPath : " + imgPath);
+            var sprite = Resources.Load<Sprite>(imgPath);
 
-            spriteRendrer.sprite = Resources.Load<Sprite>(imgPath);
+            if(sprite == null)
+            {
+                return;
+            }
+
+            spriteRendrer.sprite = sprite;
         }
 
         public T Get<T>() where T : Puzzle

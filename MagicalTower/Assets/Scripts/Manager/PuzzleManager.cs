@@ -52,11 +52,6 @@ namespace NGame.NManager
         {
             _puzzleFactory = new PuzzleFactory();
             _iPuzzleFactoryDataProvider = _puzzleFactory as PuzzleFactory.IDataProvider;
-
-            var puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Monster, EDragonType.Ice);
-     
-            Debug.Log("puzzle.Get<Monster>().MonsterInfo.MonsterType : " + puzzle.Get<Monster>().MonsterInfo);
-            puzzle.Get<Monster>().Attack();
         }
 
         private void SetPuzzleList()
@@ -103,7 +98,7 @@ namespace NGame.NManager
                         //Debug.Log("puzzle.Get<Monster>().MonsterInfo.MonsterType : " + puzzle.Get<Monster>().MonsterInfo.MonsterType);
                     }
 
-                    puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Monster, EDragonType.Ice);
+                    //puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Monster, EDragonType.Ice);
 
                     if (puzzle != null)
                     {

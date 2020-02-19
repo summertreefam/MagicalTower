@@ -46,7 +46,7 @@ namespace NGame.NPuzzle
             switch(CurrencyInfo.ECurrencyType)
             {
                 case ECurrencyType.Gold:
-                    return imgPath + "gold-hd.png";
+                    return imgPath + "gold-hd";
 
                 default:
                     return string.Empty;
