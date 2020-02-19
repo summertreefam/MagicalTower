@@ -20,6 +20,11 @@ namespace NGame.NPuzzle.NItem
 
         protected IAction _iAction;
 
+        EPuzzleType IPuzzle.GetEPuzzleType()
+        {
+            return EPuzzleType.Item;
+        }
+
         public void Create(EItemType eItemType)
         {
             base.Create(this);

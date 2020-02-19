@@ -23,6 +23,11 @@ namespace NGame.NPuzzle.NMonster
 
         protected IAction _iAction;
 
+        EPuzzleType IPuzzle.GetEPuzzleType()
+        {
+            return EPuzzleType.Monster;
+        }
+
         public void Create(Type type)
         {
             base.Create(this);

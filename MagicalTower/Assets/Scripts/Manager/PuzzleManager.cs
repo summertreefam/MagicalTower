@@ -114,6 +114,8 @@ namespace NGame.NManager
                         puzzlePositionY = GetPuzzlePositionY(puzzle, row);
 
                         puzzle.SetPuzzlePosition(new Vector2Int(puzzlePositionX, puzzlePositionY));
+
+                        _puzzleList.Add(puzzle);
                     }
                 }
             }

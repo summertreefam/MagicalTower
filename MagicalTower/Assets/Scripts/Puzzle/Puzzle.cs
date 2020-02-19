@@ -10,6 +10,7 @@ namespace NGame.NPuzzle
     public interface IPuzzle
     {
         T Get<T>() where T : Puzzle;
+        EPuzzleType GetEPuzzleType();
     }
 
     public class Puzzle
@@ -33,9 +34,15 @@ namespace NGame.NPuzzle
 
         protected void Create(IPuzzle iPuzzle)
         {
+            if (iPuzzle == null)
+            {
+                return;
+            }
+
             _iPuzzle = iPuzzle;
 
             PuzzleInfo = PuzzleInfo.Create();
+            PuzzleInfo.EPuzzleType = _iPuzzle.GetEPuzzleType();
         }
 
         public void Create(Transform parentTransform, int index)

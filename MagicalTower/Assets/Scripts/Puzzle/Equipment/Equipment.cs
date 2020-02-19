@@ -13,6 +13,11 @@ namespace NGame.NPuzzle
     {
         public EquipmentInfo EquipmentInfo { get; private set; }
 
+        EPuzzleType IPuzzle.GetEPuzzleType()
+        {
+            return EPuzzleType.Equipment;
+        }
+
         public void Create(EEquipmentType eEquipmentType)
         {
             base.Create(this);
