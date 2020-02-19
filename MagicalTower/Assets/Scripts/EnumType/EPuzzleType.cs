@@ -10,9 +10,7 @@ namespace NGame.NType
 
         Monster,
         Item,
-
         Equipment,
-
         Currency,
     }
 }

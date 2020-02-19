@@ -7,8 +7,8 @@ namespace NGame.NType
     public enum EEquipmentType
     {
         Sword,
-        bow,
+        Bow,
 
-
+        Shield,
     }
 }

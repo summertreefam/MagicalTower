@@ -9,6 +9,6 @@ namespace NGame.NInfo
 {
     public class MonsterInfo 
     {
-        public EMonsterType MonsterType { get; set; }
+        public EMonsterType EMonsterType { get; set; }
     }
 }

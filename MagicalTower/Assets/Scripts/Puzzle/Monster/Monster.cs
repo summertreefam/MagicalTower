@@ -23,18 +23,13 @@ namespace NGame.NPuzzle.NMonster
 
         protected IAction _iAction;
 
-        EPuzzleType IPuzzle.GetEPuzzleType()
-        {
-            return EPuzzleType.Monster;
-        }
-
         public void Create(Type type)
         {
             base.Create(this);
 
             MonsterInfo = new MonsterInfo()
             {
-                MonsterType = GetEMonsterType(type),
+                EMonsterType = GetEMonsterType(type),
             };
         }
 
@@ -51,10 +46,39 @@ namespace NGame.NPuzzle.NMonster
             return EMonsterType.Basic;
         }
 
+        #region IPuzzle
         Monster IPuzzle.Get<Monster>()
         {
             return this as Monster;
         }
+
+        EPuzzleType IPuzzle.GetEPuzzleType()
+        {
+            return EPuzzleType.Monster;
+        }
+
+        string IPuzzle.GetPuzzleImageName()
+        {
+            if (MonsterInfo == null)
+            {
+                return string.Empty;
+            }
+
+            const string imgPath = "Monster/";
+
+            switch (MonsterInfo.EMonsterType)
+            {
+                case EMonsterType.Dragon:
+                    return imgPath + "";
+
+                case EMonsterType.Goblin:
+                    return imgPath + "";
+
+                default:
+                    return string.Empty;
+            }
+        }
+        #endregion
 
         public void Attack()
         {

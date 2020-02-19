@@ -11,7 +11,7 @@ namespace NGame.NPuzzle.NFactory
     {
         public Currency Create<T>(T tType)
         {
-            Currency currency = null;
+            Currency currency = new Currency();
 
             try
             {
@@ -19,6 +19,7 @@ namespace NGame.NPuzzle.NFactory
 
                 if (currency != null)
                 {
+                    Debug.Log("Currency type : " + type);
                     currency.Create(type);
                 }
             }

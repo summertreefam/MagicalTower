@@ -13,11 +13,6 @@ namespace NGame.NPuzzle
     {
         public EquipmentInfo EquipmentInfo { get; private set; }
 
-        EPuzzleType IPuzzle.GetEPuzzleType()
-        {
-            return EPuzzleType.Equipment;
-        }
-
         public void Create(EEquipmentType eEquipmentType)
         {
             base.Create(this);
@@ -27,6 +22,41 @@ namespace NGame.NPuzzle
                 EEquipmentType = eEquipmentType,
             };
         }
+
+        #region IPuzzle
+        Equipment IPuzzle.Get<Equipment>()
+        {
+            return this as Equipment;
+        }
+
+        EPuzzleType IPuzzle.GetEPuzzleType()
+        {
+            return EPuzzleType.Equipment;
+        }
+
+        string IPuzzle.GetPuzzleImageName()
+        {
+            if(EquipmentInfo == null)
+            {
+                return string.Empty;
+            }
+
+            const string imgPath = "Equipment/";
+
+            switch(EquipmentInfo.EEquipmentType)
+            {
+                case EEquipmentType.Sword:
+                    return imgPath + "s_weapon100-hd.png";
+
+                case EEquipmentType.Shield:
+                    return imgPath + "assistance400-hd.png";
+
+                default:
+                    return string.Empty;
+            }
+        }
+        #endregion
+
     }
 }
 

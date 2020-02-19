@@ -92,21 +92,20 @@ namespace NGame.NManager
                 {
                     random = UnityEngine.Random.Range(1, 100);
                     //Debug.Log("random : " + random);
-                    //if(random <= 10) 
-                    //{
-                    //    puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Currency, ECurrencyType.Gold);
-                    //}
-                    //else if(random <= 50)
-                    //{
-                    //    puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Monster, EDragonType.Fire);
-                    //}
-                    //else
+                    if (random <= 50)
                     {
-                        puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Monster, EDragonType.Ice);
+                        //    puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Currency, ECurrencyType.Gold);
+                        puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Currency, ECurrencyType.Gold);
+                    }
+                    else 
+                    {
+                        puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Equipment, EEquipmentType.Sword);
                         //Debug.Log("puzzle.Get<Monster>().MonsterInfo.MonsterType : " + puzzle.Get<Monster>().MonsterInfo.MonsterType);
                     }
 
-                    if(puzzle != null)
+                    puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Monster, EDragonType.Ice);
+
+                    if (puzzle != null)
                     {
                         puzzle.Create(transform, puzzleIndex++);
           
@@ -121,6 +120,39 @@ namespace NGame.NManager
             }
         }
 
+        private void TouchPuzzle(List<int> touchPuzzleIndexList)
+        {
+            if(touchPuzzleIndexList.IsNullOrEmpty() == true)
+            {
+                return;
+            }
+
+            if(_puzzleList.IsNullOrEmpty() == true)
+            {
+                return;
+            }
+
+            Puzzle puzzle = null;
+
+            foreach(int touchPuzzleIndex in touchPuzzleIndexList)
+            {
+                puzzle = _puzzleList.Find(e => e.PuzzleInfo.Index == touchPuzzleIndex);
+
+                if(puzzle == null)
+                {
+                    continue;
+                }
+
+                if(puzzle.PuzzleInfo == null)
+                {
+                    continue;
+                }
+
+                Debug.Log("puzzle : " + puzzle.PuzzleInfo.EPuzzleType);
+            }
+        }
+
+        #region Get Puzzle Position 
         int GetPuzzlePositionX(Puzzle puzzle, int column, int puzzlePositionX)
         {
             if(puzzle == null ||
@@ -153,10 +185,11 @@ namespace NGame.NManager
             
             return (int)height * row - startPositionY;
         }
+        #endregion
 
         void PuzzleTouchManager.IObserver.Change(List<int> touchPuzzleIndexList)
         {
-            Debug.Log("touchPuzzleIndexList : " + touchPuzzleIndexList.Count);
+            TouchPuzzle(touchPuzzleIndexList);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace NGame.NPuzzle
     {
         T Get<T>() where T : Puzzle;
         EPuzzleType GetEPuzzleType();
+        string GetPuzzleImageName();
     }
 
     public class Puzzle
@@ -50,6 +51,7 @@ namespace NGame.NPuzzle
             _puzzlePrefGameObj = PuzzlePref.Create(parentTransform);
 
             SetPuzzleIndex(index);
+            //SetPuzzleSprite();
         }
 
         void SetPuzzleIndex(int index)
@@ -85,6 +87,31 @@ namespace NGame.NPuzzle
             {
                 _puzzlePrefGameObj.transform.localPosition = new Vector3(position.x, position.y, _puzzlePrefGameObj.transform.localPosition.z);
             }
+        }
+
+        private void SetPuzzleSprite()
+        {
+            if(_puzzlePrefGameObj == null)
+            {
+                return;
+            }
+
+            if(_iPuzzle == null)
+            {
+                return;
+            }
+
+            var spriteRendrer = _puzzlePrefGameObj.GetComponent<SpriteRenderer>();
+
+            if (spriteRendrer == null)
+            {
+                return;
+            }
+
+            var imgPath = "Images/" + _iPuzzle.GetPuzzleImageName();
+            Debug.Log("imgPath : " + imgPath);
+
+            spriteRendrer.sprite = Resources.Load<Sprite>(imgPath);
         }
 
         public T Get<T>() where T : Puzzle

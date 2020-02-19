@@ -20,11 +20,6 @@ namespace NGame.NPuzzle.NItem
 
         protected IAction _iAction;
 
-        EPuzzleType IPuzzle.GetEPuzzleType()
-        {
-            return EPuzzleType.Item;
-        }
-
         public void Create(EItemType eItemType)
         {
             base.Create(this);
@@ -35,10 +30,34 @@ namespace NGame.NPuzzle.NItem
             };
         }
 
+        #region IPuzzle
         Item IPuzzle.Get<Item>()
         {
             return this as Item;
         }
+
+        EPuzzleType IPuzzle.GetEPuzzleType()
+        {
+            return EPuzzleType.Item;
+        }
+
+        string IPuzzle.GetPuzzleImageName()
+        {
+            if(ItemInfo == null)
+            {
+                return string.Empty;
+            }
+
+            switch(ItemInfo.EItemType)
+            {
+                case EItemType.HpPotion:
+                    return "";
+
+                default:
+                    return string.Empty;
+            }
+        }
+        #endregion
 
         public void Use()
         {

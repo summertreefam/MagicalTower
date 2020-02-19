@@ -11,7 +11,7 @@ namespace NGame.NPuzzle.NFactory
     {
         public Equipment Create<T>(T tType)
         {
-            Equipment equipment = null;
+            Equipment equipment = new Equipment();
 
             try
             {
@@ -21,9 +21,10 @@ namespace NGame.NPuzzle.NFactory
                 {
                     case EEquipmentType.Sword:
        
+
                         break;
 
-                    case EEquipmentType.bow:
+                    case EEquipmentType.Bow:
                         break;
                 }
 
