@@ -6,6 +6,7 @@ using System.Linq;
 
 using NGame.NInfo;
 using NGame.NType;
+using NGame.NType.NMonster;
 
 namespace NGame.NPuzzle.NMonster
 {
@@ -23,13 +24,15 @@ namespace NGame.NPuzzle.NMonster
 
         protected IAction _iAction;
 
-        public void Create(Type type)
+        public void Create<T>(Type type, T subType, EDifficultyType eDifficultyType)
         {
             base.Create(this);
 
             MonsterInfo = new MonsterInfo()
             {
                 EMonsterType = GetEMonsterType(type),
+                SubMonsterType = Enum.Parse(typeof(T), Enum.GetName(typeof(T), subType)).ToString(),
+                EDifficultyType = eDifficultyType,
             };
         }
 
@@ -64,19 +67,7 @@ namespace NGame.NPuzzle.NMonster
                 return string.Empty;
             }
 
-            const string imgPath = "Monster/";
-
-            switch (MonsterInfo.EMonsterType)
-            {
-                case EMonsterType.Dragon:
-                    return imgPath + "";
-
-                case EMonsterType.Goblin:
-                    return imgPath + "";
-
-                default:
-                    return string.Empty;
-            }
+            return "Monster/" + MonsterInfo.EMonsterType.ToString() + "/" + MonsterInfo.SubMonsterType + "_" + MonsterInfo.EDifficultyType;
         }
         #endregion
 

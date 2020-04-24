@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 
 using NGame.NType;
+using NGame.NType.NMonster;
 
 namespace NGame.NPuzzle.NFactory
 {
@@ -13,6 +14,7 @@ namespace NGame.NPuzzle.NFactory
         public interface IDataProvider
         {
             Puzzle CreatePuzzle<T>(EPuzzleType ePuzzleType, T tType) where T : Enum;
+            Puzzle CreateMonsterPuzzle<T>(T tType, EDifficultyType eDifficultyType) where T : Enum;
         }
 
         MonsterFactory _monsterFactory;
@@ -34,14 +36,14 @@ namespace NGame.NPuzzle.NFactory
         }
 
         #region Create Puzzle
-        Puzzle CreateMonsterPuzzle<T>(T tType) where T : Enum
+        Puzzle CreateMonsterPuzzle<T>(T tType, EDifficultyType eDifficultyType) where T : Enum
         {
             if(_monsterFactory == null)
             {
                 return null;
             }
 
-            return _monsterFactory.CreateMonster(tType);
+            return _monsterFactory.CreateMonster(tType, eDifficultyType);
         }
 
         Puzzle CreateItemPuzzle<T>(T tType) where T : Enum
@@ -80,10 +82,6 @@ namespace NGame.NPuzzle.NFactory
 
             switch (ePuzzleType)
             {
-                case EPuzzleType.Monster:
-                    puzzle = CreateMonsterPuzzle(tType);
-                    break;
-
                 case EPuzzleType.Item:
                     puzzle = CreateItemPuzzle(tType);
                     break;
@@ -98,6 +96,11 @@ namespace NGame.NPuzzle.NFactory
             }
 
             return puzzle;
+        }
+
+        Puzzle IDataProvider.CreateMonsterPuzzle<T>(T tType, EDifficultyType eDifficultyType)
+        {
+            return CreateMonsterPuzzle(tType, eDifficultyType);
         }
         #endregion
     }

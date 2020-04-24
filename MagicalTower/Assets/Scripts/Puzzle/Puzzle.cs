@@ -112,7 +112,7 @@ namespace NGame.NPuzzle
             var sprite = Resources.Load<Sprite>(imgPath);
 
             if(sprite == null)
-            {
+            { 
                 return;
             }
 

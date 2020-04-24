@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace NGame.NType.NMonster
 {
-    public enum EGoblinType
+    public enum EDifficultyType
     {
-        Thief,
-        Spear,
+        Normal,
+        MiddleBoss,
+        FinalBoss,
     }
 }
-

@@ -95,6 +95,7 @@ namespace NGame.NManager
                     else 
                     {
                         puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Equipment, EEquipmentType.Sword);
+                        puzzle = _iPuzzleFactoryDataProvider.CreateMonsterPuzzle(EDragonType.Ice, EDifficultyType.FinalBoss);
                         //Debug.Log("puzzle.Get<Monster>().MonsterInfo.MonsterType : " + puzzle.Get<Monster>().MonsterInfo.MonsterType);
                     }
 

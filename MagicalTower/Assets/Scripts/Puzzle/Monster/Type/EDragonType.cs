@@ -6,9 +6,6 @@ namespace NGame.NType.NMonster
 {
     public enum EDragonType
     {
-        Normal,
-        MidBoss,
-
         Fire,
         Ice,
     }

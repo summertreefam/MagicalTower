@@ -4,8 +4,7 @@ using UnityEngine;
 using System;
 
 using NGame.NPuzzle.NMonster;
-using NGame.NType;
-using NGame.NPuzzle.NMonster.NDragon;
+using NGame.NType.NMonster;
 
 namespace NGame.NPuzzle.NFactory
 {
@@ -32,7 +31,7 @@ namespace NGame.NPuzzle.NFactory
             _monsterFactoryList.Add(new GoblinFactory());
         }
 
-        public Monster CreateMonster<T>(T type) where T : Enum
+        public Monster CreateMonster<T>(T type, EDifficultyType eDifficultyType) where T : Enum
         {
             Monster monster = null;
             
@@ -47,7 +46,7 @@ namespace NGame.NPuzzle.NFactory
 
                 if (monster != null)
                 {
-                    monster.Create(typeof(T));
+                    monster.Create(typeof(T), type, eDifficultyType);
                     break;
                 }
             }
