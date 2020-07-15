@@ -35,6 +35,11 @@ namespace NGame.NManager
 
         FloorData GetCurrentFloorData(int floor)
         {
+            if(_floorDataList.IsNullOrEmpty() == true)
+            {
+                return null;
+            }
+
             return _floorDataList.Find(floorData => floorData.Floor == floor);
         }
 

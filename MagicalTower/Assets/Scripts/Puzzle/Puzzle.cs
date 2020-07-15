@@ -21,17 +21,17 @@ namespace NGame.NPuzzle
         { 
             get
             {
-                if(_puzzlePrefGameObj == null)
+                if(_puzzlePref == null)
                 {
                     return null;
                 }
 
-                return _puzzlePrefGameObj.GetComponent<BoxCollider2D>();
+                return _puzzlePref.BoxCollider;
             }
         }
 
         IPuzzle _iPuzzle;
-        GameObject _puzzlePrefGameObj;
+        PuzzlePref _puzzlePref;
 
         protected void Create(IPuzzle iPuzzle)
         {
@@ -48,32 +48,13 @@ namespace NGame.NPuzzle
 
         public void Create(Transform parentTransform, int index)
         {
-            _puzzlePrefGameObj = PuzzlePref.Create(parentTransform);
+            _puzzlePref = PuzzlePref.Create(new PuzzlePref.PuzzlePrefInfo()
+            {
+                ParentTransform = parentTransform,
+                PuzzleIndex = index,
+            });
 
-            SetPuzzleIndex(index);
             SetPuzzleSprite();
-        }
-
-        void SetPuzzleIndex(int index)
-        {
-            if (PuzzleInfo != null)
-            {
-                PuzzleInfo.Index = index;
-            }
-
-            if (_puzzlePrefGameObj == null)
-            {
-                return;
-            }
-
-            var puzzlePrefab = _puzzlePrefGameObj.GetComponent<PuzzlePref>();
-
-            if(puzzlePrefab == null)
-            {
-                return;
-            }
-
-            puzzlePrefab.PuzzleIndex = index;
         }
 
         public void SetPuzzlePosition(Vector2Int position)
@@ -83,15 +64,15 @@ namespace NGame.NPuzzle
                 PuzzleInfo.Position = position;
             }
 
-            if(_puzzlePrefGameObj != null)
+            if(_puzzlePref != null)
             {
-                _puzzlePrefGameObj.transform.localPosition = new Vector3(position.x, position.y, _puzzlePrefGameObj.transform.localPosition.z);
+                _puzzlePref.SetPosition(position);
             }
         }
 
         private void SetPuzzleSprite()
         {
-            if(_puzzlePrefGameObj == null)
+            if(_puzzlePref == null)
             {
                 return;
             }
@@ -101,22 +82,7 @@ namespace NGame.NPuzzle
                 return;
             }
 
-            var spriteRendrer = _puzzlePrefGameObj.GetComponent<SpriteRenderer>();
-
-            if (spriteRendrer == null)
-            {
-                return;
-            }
-
-            var imgPath = "Images/" + _iPuzzle.GetPuzzleImageName();
-            var sprite = Resources.Load<Sprite>(imgPath);
-
-            if(sprite == null)
-            { 
-                return;
-            }
-
-            spriteRendrer.sprite = sprite;
+            _puzzlePref.SetSprite(_iPuzzle.GetPuzzleImageName());
         }
 
         public T Get<T>() where T : Puzzle

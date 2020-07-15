@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 using NGame.NPuzzle;
 
@@ -11,11 +12,12 @@ namespace NGame.NManager
     {
         public interface IObserver
         {
-            void Change(List<int> touchPuzzleIndexList);
+            void Change(List<int> touchedPuzzleIndexList);
         }
 
-        List<IObserver> _iObserverList;
+        int[] Ranges = new int[] { 1, 5, 6, 7, };
 
+        List<IObserver> _iObserverList;
         List<int> _touchPuzzleIndexList;
 
         void Start()
@@ -88,8 +90,8 @@ namespace NGame.NManager
             }
 
             var touchPosition = Camera.main.ScreenToWorldPoint(position);
-
             var hit = Physics2D.Raycast(touchPosition, Vector2.zero);
+            int puzzleIndex = 0;
 
             if (hit == false)
             {
@@ -111,17 +113,47 @@ namespace NGame.NManager
                 return;
             }
 
-            if(_touchPuzzleIndexList.Contains(puzzlePrefab.PuzzleIndex) == true)
+            puzzleIndex = puzzlePrefab.PuzzleIndex;
+
+            if (_touchPuzzleIndexList.Contains(puzzleIndex) == true)
             {
                 return;
             }
 
-            _touchPuzzleIndexList.Add(puzzlePrefab.PuzzleIndex);
+            if(CheckPossibleRange(puzzleIndex) == false)
+            {
+                return;
+            }
+
+            _touchPuzzleIndexList.Add(puzzleIndex);
 
             if(_iObserverList != null)
             {
                 _iObserverList.ForEach(e => e.Change(_touchPuzzleIndexList));
             }
+        }
+
+        bool CheckPossibleRange(int puzzleIndex)
+        {
+            if (_touchPuzzleIndexList == null)
+            {
+                return false;
+            }
+
+            if (_touchPuzzleIndexList.Count <= 0)
+            {
+                return true;
+            }
+
+            int lastPuzzleIndex = _touchPuzzleIndexList[_touchPuzzleIndexList.Count - 1];
+            int result = Mathf.Abs(lastPuzzleIndex - puzzleIndex);
+
+            if(Ranges.ToList().Contains(result) == false)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

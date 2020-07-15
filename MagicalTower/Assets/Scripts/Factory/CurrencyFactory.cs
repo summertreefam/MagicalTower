@@ -19,7 +19,6 @@ namespace NGame.NPuzzle.NFactory
 
                 if (currency != null)
                 {
-                    Debug.Log("Currency type : " + type);
                     currency.Create(type);
                 }
             }

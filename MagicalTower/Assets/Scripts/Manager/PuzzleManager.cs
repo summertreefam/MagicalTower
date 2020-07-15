@@ -116,7 +116,7 @@ namespace NGame.NManager
             }
         }
 
-        private void TouchPuzzle(List<int> touchPuzzleIndexList)
+        private void TouchedPuzzle(List<int> touchPuzzleIndexList)
         {
             if(touchPuzzleIndexList.IsNullOrEmpty() == true)
             {
@@ -134,17 +134,13 @@ namespace NGame.NManager
             {
                 puzzle = _puzzleList.Find(e => e.PuzzleInfo.Index == touchPuzzleIndex);
 
-                if(puzzle == null)
+                if(puzzle == null ||
+                   puzzle.PuzzleInfo == null)
                 {
                     continue;
                 }
 
-                if(puzzle.PuzzleInfo == null)
-                {
-                    continue;
-                }
-
-                Debug.Log("puzzle : " + puzzle.PuzzleInfo.EPuzzleType);
+                Debug.Log("puzzle : " + puzzle.PuzzleInfo.Index + " / " + puzzle.PuzzleInfo.EPuzzleType);
             }
         }
 
@@ -183,9 +179,9 @@ namespace NGame.NManager
         }
         #endregion
 
-        void PuzzleTouchManager.IObserver.Change(List<int> touchPuzzleIndexList)
+        void PuzzleTouchManager.IObserver.Change(List<int> touchedPuzzleIndexList)
         {
-            TouchPuzzle(touchPuzzleIndexList);
+            TouchedPuzzle(touchedPuzzleIndexList);
         }
     }
 }
