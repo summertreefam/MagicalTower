@@ -46,12 +46,19 @@ namespace NGame.NPuzzle
             PuzzleInfo.EPuzzleType = _iPuzzle.GetEPuzzleType();
         }
 
-        public void Create(Transform parentTransform, int index)
+        public void Create(Transform parentTransform, int puzzleIndex)
+        {
+            PuzzleInfo.Index = puzzleIndex;
+
+            CreatePuzzlePref(parentTransform, puzzleIndex);
+        }
+
+        void CreatePuzzlePref(Transform parentTransform, int puzzleIndex)
         {
             _puzzlePref = PuzzlePref.Create(new PuzzlePref.PuzzlePrefInfo()
             {
                 ParentTransform = parentTransform,
-                PuzzleIndex = index,
+                PuzzleIndex = puzzleIndex,
             });
 
             SetPuzzleSprite();

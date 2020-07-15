@@ -36,6 +36,13 @@ namespace NGame.NManager
                 return;
             }
 
+            if (Input.GetMouseButtonUp(0) == true)
+            {
+                _touchPuzzleIndexList.Clear();
+
+                return;
+            }
+
             if (Input.touchCount > 0)
             {
                 Touch();
@@ -77,7 +84,12 @@ namespace NGame.NManager
                     TouchPuzzle(touch.position);
                     break;
 
+                case TouchPhase.Ended:
+                    _touchPuzzleIndexList.Clear();
+                    break;
+
                 case TouchPhase.Canceled:
+                    _touchPuzzleIndexList.Clear();
                     break;
             }
         }
@@ -127,6 +139,11 @@ namespace NGame.NManager
 
             _touchPuzzleIndexList.Add(puzzleIndex);
 
+
+            foreach(int index in _touchPuzzleIndexList)
+            {
+                Debug.Log("index : " + index);
+            }
             if(_iObserverList != null)
             {
                 _iObserverList.ForEach(e => e.Change(_touchPuzzleIndexList));

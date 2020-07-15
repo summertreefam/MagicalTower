@@ -134,9 +134,17 @@ namespace NGame.NManager
             {
                 puzzle = _puzzleList.Find(e => e.PuzzleInfo.Index == touchPuzzleIndex);
 
-                if(puzzle == null ||
-                   puzzle.PuzzleInfo == null)
+                if(puzzle == null)
                 {
+                    Debug.LogError("puzzle = null");
+
+                    continue;
+                }
+
+                if(puzzle.PuzzleInfo == null)
+                {
+                    Debug.LogError("puzzle.PuzzleInfo = null");
+
                     continue;
                 }
 

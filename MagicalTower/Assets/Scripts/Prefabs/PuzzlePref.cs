@@ -13,9 +13,9 @@ namespace NGame.NPuzzle
             public int PuzzleIndex;
         }
 
-        int _puzzleIndex;
-        
         public int PuzzleIndex { get { return _puzzleIndex; } }
+
+        int _puzzleIndex;
 
         public static PuzzlePref Create(PuzzlePrefInfo info)
         {
