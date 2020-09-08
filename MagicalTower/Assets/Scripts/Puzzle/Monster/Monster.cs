@@ -60,14 +60,17 @@ namespace NGame.NPuzzle.NMonster
             return EPuzzleType.Monster;
         }
 
-        string IPuzzle.GetPuzzleImageName()
+        string IPuzzle.PuzzleImageName
         {
-            if (MonsterInfo == null)
+            get
             {
-                return string.Empty;
-            }
+                if (MonsterInfo == null)
+                {
+                    return string.Empty;
+                }
 
-            return "Monster/" + MonsterInfo.EMonsterType.ToString() + "/" + MonsterInfo.SubMonsterType + "_" + MonsterInfo.EDifficultyType;
+                return "Monster/" + MonsterInfo.EMonsterType.ToString() + "/" + MonsterInfo.SubMonsterType + "_" + MonsterInfo.EDifficultyType;
+            }
         }
         #endregion
 

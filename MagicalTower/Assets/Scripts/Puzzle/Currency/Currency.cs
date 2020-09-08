@@ -34,22 +34,25 @@ namespace NGame.NPuzzle
             return EPuzzleType.Currency;
         }
 
-        string IPuzzle.GetPuzzleImageName()
+        string IPuzzle.PuzzleImageName
         {
-            if(CurrencyInfo == null)
+            get
             {
-                return string.Empty;
-            }
-
-            const string imgPath = "Currency/"; 
-
-            switch(CurrencyInfo.ECurrencyType)
-            {
-                case ECurrencyType.Gold:
-                    return imgPath + "gold-hd";
-
-                default:
+                if (CurrencyInfo == null)
+                {
                     return string.Empty;
+                }
+
+                const string imgPath = "Currency/";
+
+                switch (CurrencyInfo.ECurrencyType)
+                {
+                    case ECurrencyType.Gold:
+                        return imgPath + "gold-hd";
+
+                    default:
+                        return string.Empty;
+                }
             }
         }
         #endregion

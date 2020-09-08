@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 
 using NGame.NInfo;
 using NGame.NType;
@@ -34,25 +35,28 @@ namespace NGame.NPuzzle
             return EPuzzleType.Equipment;
         }
 
-        string IPuzzle.GetPuzzleImageName()
+        string IPuzzle.PuzzleImageName
         {
-            if(EquipmentInfo == null)
+            get
             {
-                return string.Empty;
-            }
-
-            const string imgPath = "Equipment/";
-
-            switch(EquipmentInfo.EEquipmentType)
-            {
-                case EEquipmentType.Sword:
-                    return imgPath + "s_weapon100-hd";
-
-                case EEquipmentType.Shield:
-                    return imgPath + "assistance400-hd";
-
-                default:
+                if (EquipmentInfo == null)
+                {
                     return string.Empty;
+                }
+
+                const string imgPath = "Equipment/";
+
+                switch (EquipmentInfo.EEquipmentType)
+                {
+                    case EEquipmentType.Sword:
+                        return imgPath + "s_weapon100-hd";
+
+                    case EEquipmentType.Shield:
+                        return imgPath + "assistance400-hd";
+
+                    default:
+                        return string.Empty;
+                }
             }
         }
         #endregion

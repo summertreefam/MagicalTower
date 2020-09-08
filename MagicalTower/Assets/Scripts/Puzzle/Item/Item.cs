@@ -41,20 +41,23 @@ namespace NGame.NPuzzle.NItem
             return EPuzzleType.Item;
         }
 
-        string IPuzzle.GetPuzzleImageName()
+        string IPuzzle.PuzzleImageName
         {
-            if(ItemInfo == null)
+            get
             {
-                return string.Empty;
-            }
-
-            switch(ItemInfo.EItemType)
-            {
-                case EItemType.HpPotion:
-                    return "";
-
-                default:
+                if (ItemInfo == null)
+                {
                     return string.Empty;
+                }
+
+                switch (ItemInfo.EItemType)
+                {
+                    case EItemType.HpPotion:
+                        return "";
+
+                    default:
+                        return string.Empty;
+                }
             }
         }
         #endregion

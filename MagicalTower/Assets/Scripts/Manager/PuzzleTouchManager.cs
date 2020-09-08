@@ -112,13 +112,12 @@ namespace NGame.NManager
 
             var transform = hit.transform;
 
-            if (transform == null ||
-                transform.gameObject == null)
+            if (transform == null)
             {
                 return;
             }
 
-            var puzzlePrefab = transform.gameObject.GetComponent<PuzzlePref>();
+            var puzzlePrefab = transform.GetComponent<PuzzlePref>();
 
             if (puzzlePrefab == null)
             {

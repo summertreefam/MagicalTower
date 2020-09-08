@@ -45,7 +45,7 @@ namespace NGame.NManager
         void InitPuzzleList()
         {
             _puzzleList = new List<Puzzle>();
-            _puzzleList.Clear(); 
+            _puzzleList.Clear();
         }
 
         void InitPuzzleFactory()
@@ -56,12 +56,12 @@ namespace NGame.NManager
 
         private void SetPuzzleList()
         {
-            if(_iFloorDataProvider == null)
+            if (_iFloorDataProvider == null)
             {
                 return;
             }
 
-            if(_iPuzzleFactoryDataProvider == null)
+            if (_iPuzzleFactoryDataProvider == null)
             {
                 return;
             }
@@ -83,7 +83,7 @@ namespace NGame.NManager
 
             for (int row = 0; row < NUtility.GameData.MaxPuzzleRow; ++row)
             {
-                for(int column = 0; column < NUtility.GameData.MaxPuzzleColumn; ++column)
+                for (int column = 0; column < NUtility.GameData.MaxPuzzleColumn; ++column)
                 {
                     random = UnityEngine.Random.Range(1, 100);
                     //Debug.Log("random : " + random);
@@ -92,7 +92,7 @@ namespace NGame.NManager
                         //    puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Currency, ECurrencyType.Gold);
                         puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Currency, ECurrencyType.Gold);
                     }
-                    else 
+                    else
                     {
                         puzzle = _iPuzzleFactoryDataProvider.CreatePuzzle(EPuzzleType.Equipment, EEquipmentType.Sword);
                         puzzle = _iPuzzleFactoryDataProvider.CreateMonsterPuzzle(EDragonType.Ice, EDifficultyType.FinalBoss);
@@ -104,7 +104,7 @@ namespace NGame.NManager
                     if (puzzle != null)
                     {
                         puzzle.Create(transform, puzzleIndex++);
-          
+
                         puzzlePositionX = GetPuzzlePositionX(puzzle, column, puzzlePositionX);
                         puzzlePositionY = GetPuzzlePositionY(puzzle, row);
 
@@ -118,38 +118,84 @@ namespace NGame.NManager
 
         private void TouchedPuzzle(List<int> touchPuzzleIndexList)
         {
-            if(touchPuzzleIndexList.IsNullOrEmpty() == true)
+            if (touchPuzzleIndexList.IsNullOrEmpty() == true)
             {
                 return;
             }
 
-            if(_puzzleList.IsNullOrEmpty() == true)
+            if (_puzzleList.IsNullOrEmpty() == true)
+            {
+                return;
+            }
+
+            Puzzle firstTouchedPuzzle = FindPuzzleByIndex(touchPuzzleIndexList[0]);
+
+            if(firstTouchedPuzzle == null ||
+               firstTouchedPuzzle.PuzzleInfo == null)
             {
                 return;
             }
 
             Puzzle puzzle = null;
 
-            foreach(int touchPuzzleIndex in touchPuzzleIndexList)
+            for (int i = 1; i < touchPuzzleIndexList.Count; i++)
             {
-                puzzle = _puzzleList.Find(e => e.PuzzleInfo.Index == touchPuzzleIndex);
+                puzzle = FindPuzzleByIndex(touchPuzzleIndexList[i]);
 
-                if(puzzle == null)
+                if (puzzle == null ||
+                    puzzle.PuzzleInfo == null)
                 {
-                    Debug.LogError("puzzle = null");
-
                     continue;
                 }
 
-                if(puzzle.PuzzleInfo == null)
+                if(CheckPossiblePuzzle(firstTouchedPuzzle, puzzle) == false)
                 {
-                    Debug.LogError("puzzle.PuzzleInfo = null");
-
                     continue;
                 }
-
                 Debug.Log("puzzle : " + puzzle.PuzzleInfo.Index + " / " + puzzle.PuzzleInfo.EPuzzleType);
             }
+        }
+
+        private bool CheckPossiblePuzzle(Puzzle puzzle, Puzzle comparePuzzle)
+        {
+            if(puzzle == null ||
+               puzzle.PuzzleInfo == null)
+            {
+                return false;
+            }
+
+            if (comparePuzzle == null ||
+                comparePuzzle.PuzzleInfo == null)
+            {
+                return false;
+            }
+
+            if(CheckPossiblePuzzleType(puzzle.PuzzleInfo.EPuzzleType, comparePuzzle.PuzzleInfo.EPuzzleType) == false)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool CheckPossiblePuzzleType(EPuzzleType puzzleType, EPuzzleType comparePuzzleType)
+        {
+            if(puzzleType != comparePuzzleType)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        Puzzle FindPuzzleByIndex(int index)
+        {
+            if(_puzzleList.IsNullOrEmpty() == true)
+            {
+                return null;
+            }
+
+            return _puzzleList.Find(e => e.PuzzleInfo.Index == index);
         }
 
         #region Get Puzzle Position 

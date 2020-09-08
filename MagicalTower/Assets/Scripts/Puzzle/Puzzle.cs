@@ -9,7 +9,7 @@ namespace NGame.NPuzzle
     {
         T Get<T>() where T : Puzzle;
         EPuzzleType GetEPuzzleType();
-        string GetPuzzleImageName();
+        string PuzzleImageName { get; }
     }
 
     public class Puzzle
@@ -87,7 +87,7 @@ namespace NGame.NPuzzle
                 return;
             }
 
-            _puzzlePref.SetSprite(_iPuzzle.GetPuzzleImageName());
+            _puzzlePref.SetSprite(_iPuzzle.PuzzleImageName);
         }
 
         public T Get<T>() where T : Puzzle

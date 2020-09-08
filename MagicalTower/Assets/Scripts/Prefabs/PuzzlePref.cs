@@ -76,7 +76,7 @@ namespace NGame.NPuzzle
                 return;
             }
 
-            spriteRendrer.sprite = sprite;
+            spriteRendrer.sprite = sprite;  
         }
 
         public BoxCollider2D BoxCollider
