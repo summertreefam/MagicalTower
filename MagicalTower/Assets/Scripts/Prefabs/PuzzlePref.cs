@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace NGame.NPuzzle
 {
@@ -13,9 +11,7 @@ namespace NGame.NPuzzle
             public int PuzzleIndex;
         }
 
-        public int PuzzleIndex { get { return _puzzleIndex; } }
-
-        int _puzzleIndex;
+        public int PuzzleIndex { get; private set; }
 
         public static PuzzlePref Create(PuzzlePrefInfo info)
         {
@@ -51,7 +47,7 @@ namespace NGame.NPuzzle
 
         private void Init(int puzzleIndex)
         {
-            _puzzleIndex = puzzleIndex;
+            PuzzleIndex = puzzleIndex;
         }
 
         public void SetPosition(Vector2Int positon)

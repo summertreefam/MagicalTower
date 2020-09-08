@@ -139,11 +139,11 @@ namespace NGame.NManager
 
             _touchPuzzleIndexList.Add(puzzleIndex);
 
-
             foreach(int index in _touchPuzzleIndexList)
             {
                 Debug.Log("index : " + index);
             }
+
             if(_iObserverList != null)
             {
                 _iObserverList.ForEach(e => e.Change(_touchPuzzleIndexList));
