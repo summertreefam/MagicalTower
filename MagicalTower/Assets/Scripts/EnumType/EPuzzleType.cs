@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace NGame.NType
+﻿namespace NGame.NType
 {
     public enum EPuzzleType
     {

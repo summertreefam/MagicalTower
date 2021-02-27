@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+using UnityEngine.EventSystems;
 
 using NGame.NPuzzle;
 
@@ -14,8 +14,6 @@ namespace NGame.NManager
         {
             void Change(List<int> touchedPuzzleIndexList);
         }
-
-        int[] Ranges = new int[] { 1, 5, 6, 7, };
 
         List<IObserver> _iObserverList;
         List<int> _touchPuzzleIndexList;
@@ -43,11 +41,15 @@ namespace NGame.NManager
                 return;
             }
 
-            if (Input.touchCount > 0)
+            if (Input.touchCount == 1)
             {
                 Touch();
 
                 return;
+            }
+            else if(Input.touchCount > 1)
+            {
+                return; 
             }
         }
 
@@ -80,7 +82,6 @@ namespace NGame.NManager
             {
                 case TouchPhase.Began:
                 case TouchPhase.Moved:
-                    Debug.Log("PuzzleTouchManager Began Touch");
                     TouchPuzzle(touch.position);
                     break;
 
@@ -103,7 +104,6 @@ namespace NGame.NManager
 
             var touchPosition = Camera.main.ScreenToWorldPoint(position);
             var hit = Physics2D.Raycast(touchPosition, Vector2.zero);
-            int puzzleIndex = 0;
 
             if (hit == false)
             {
@@ -111,21 +111,18 @@ namespace NGame.NManager
             }
 
             var transform = hit.transform;
-
             if (transform == null)
             {
                 return;
             }
 
             var puzzlePrefab = transform.GetComponent<PuzzlePref>();
-
             if (puzzlePrefab == null)
             {
                 return;
             }
 
-            puzzleIndex = puzzlePrefab.PuzzleIndex;
-
+            var puzzleIndex = puzzlePrefab.PuzzleIndex;
             if (_touchPuzzleIndexList.Contains(puzzleIndex) == true)
             {
                 return;
@@ -137,11 +134,6 @@ namespace NGame.NManager
             }
 
             _touchPuzzleIndexList.Add(puzzleIndex);
-
-            foreach(int index in _touchPuzzleIndexList)
-            {
-                Debug.Log("index : " + index);
-            }
 
             if(_iObserverList != null)
             {
@@ -163,9 +155,13 @@ namespace NGame.NManager
 
             int lastPuzzleIndex = _touchPuzzleIndexList[_touchPuzzleIndexList.Count - 1];
             int result = Mathf.Abs(lastPuzzleIndex - puzzleIndex);
+            int maxColumn = NUtility.GameData.MaxPuzzleColumn;
 
-            if(Ranges.ToList().Contains(result) == false)
-            {
+            if (result != 1 &&
+                result != maxColumn &&
+                result != maxColumn - 1 &&
+                result != maxColumn + 1)
+            {   
                 return false;
             }
 
